@@ -29,7 +29,7 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
-
+    jooqGenerator("org.postgresql:postgresql:42.3.1")
     implementation("org.springdoc:springdoc-openapi-ui:1.6.6")
     testImplementation("org.springdoc:springdoc-openapi-webmvc-core:1.6.6")
     implementation("org.springdoc:springdoc-openapi-kotlin:1.6.6")
@@ -77,8 +77,10 @@ jooq{
                         isRecords = true
                         isImmutablePojos = true
                         isFluentSetters = true
+                        isDaos = true
+                        isKotlinSetterJvmNameAnnotationsOnIsPrefix = true
+                        isPojosAsKotlinDataClasses = true
                     }
-
                     target.apply {
                         directory = "${projectDir}/src/main/kotlin/jooq/"  // default (can be omitted)
                     }
