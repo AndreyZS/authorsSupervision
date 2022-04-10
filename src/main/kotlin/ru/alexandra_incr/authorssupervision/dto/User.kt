@@ -2,10 +2,11 @@ package ru.alexandra_incr.authorssupervision.dto
 
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
+import java.time.LocalDate
 
 sealed interface UserSystem
 
-class AuthorizedUser(val id: Long, val login: String, val listRoles: List<GrantedAuthority>) :
+class AuthorizedUser(val id: Long, val login: String, val listRoles: List<GrantedAuthority>,val dateChangePassword:LocalDate) :
     UserSystem, UserDetails {
     override fun getAuthorities(): Collection<GrantedAuthority> {
         return listRoles

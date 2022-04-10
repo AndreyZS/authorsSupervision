@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service
 import org.springframework.util.StringUtils
 import org.springframework.web.filter.GenericFilterBean
 import ru.alexandra_incr.authorssupervision.dto.AuthorizedUser
+import java.time.LocalDate
 import java.util.*
 import javax.servlet.FilterChain
 import javax.servlet.ServletRequest
@@ -59,6 +60,7 @@ class AuthenticationService(
             .withIssuer(issuer)
             .withClaim("id", payload.id)
             .withClaim("login", payload.login)
+            .withClaim("dateChangePassword", payload.dateChangePassword.toString())
             .withArrayClaim("roles", payload.listRoles.map { it.authority }.toTypedArray())
             .sign(algorithm)
     }
@@ -69,16 +71,26 @@ class AuthenticationService(
             .build()
         try {
             val jwt: DecodedJWT = verifier.verify(token)
-            val userDetails = AuthorizedUser(
-                id = jwt.claims["id"]!!.asLong(),
-                login = jwt.claims["login"]!!.asString(),
-                listRoles = jwt.claims["roles"]!!.asList(String::class.java).map { SimpleGrantedAuthority(it) }
-            )
-            return UsernamePasswordAuthenticationToken(userDetails, null, userDetails.authorities)
-        }catch (e:Exception){
+            val dateToken = LocalDate.parse(jwt.claims["dateChangePassword"]!!.asString())
+            if (checkDateChangePassword(dateToken)) {
+                val userDetails = AuthorizedUser(
+                    id = jwt.claims["id"]!!.asLong(),
+                    login = jwt.claims["login"]!!.asString(),
+                    listRoles = jwt.claims["roles"]!!.asList(String::class.java).map { SimpleGrantedAuthority(it) },
+                    dateChangePassword = dateToken
+                )
+                return UsernamePasswordAuthenticationToken(userDetails, null, userDetails.authorities)
+            } else
+                throw Exception("Смените пароль")
+        } catch (e: Exception) {
             throw Exception("Ваша сессия закончилась")
         }
+    }
 
+    private fun checkDateChangePassword(date: LocalDate): Boolean {
+        val nowDate = LocalDate.now()
+        //TODO проверка на 60 дней
+        return true
     }
 
     private fun getTokenFromRequest(request: HttpServletRequest): String? {

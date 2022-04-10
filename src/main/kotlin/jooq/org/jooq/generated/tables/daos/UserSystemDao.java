@@ -4,6 +4,7 @@
 package org.jooq.generated.tables.daos;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.jooq.Configuration;
@@ -75,6 +76,13 @@ public class UserSystemDao extends DAOImpl<UserSystemRecord, org.jooq.generated.
     }
 
     /**
+     * Fetch a unique record that has <code>login = value</code>
+     */
+    public org.jooq.generated.tables.pojos.UserSystem fetchOneByLogin(String value) {
+        return fetchOne(UserSystem.USER_SYSTEM.LOGIN, value);
+    }
+
+    /**
      * Fetch records that have <code>password BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
@@ -87,5 +95,20 @@ public class UserSystemDao extends DAOImpl<UserSystemRecord, org.jooq.generated.
      */
     public List<org.jooq.generated.tables.pojos.UserSystem> fetchByPassword(String... values) {
         return fetch(UserSystem.USER_SYSTEM.PASSWORD, values);
+    }
+
+    /**
+     * Fetch records that have <code>date_change_password BETWEEN lowerInclusive
+     * AND upperInclusive</code>
+     */
+    public List<org.jooq.generated.tables.pojos.UserSystem> fetchRangeOfDateChangePassword(LocalDate lowerInclusive, LocalDate upperInclusive) {
+        return fetchRange(UserSystem.USER_SYSTEM.DATE_CHANGE_PASSWORD, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>date_change_password IN (values)</code>
+     */
+    public List<org.jooq.generated.tables.pojos.UserSystem> fetchByDateChangePassword(LocalDate... values) {
+        return fetch(UserSystem.USER_SYSTEM.DATE_CHANGE_PASSWORD, values);
     }
 }

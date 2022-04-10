@@ -5,6 +5,7 @@ package org.jooq.generated.tables.pojos;
 
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 
 /**
@@ -15,24 +16,28 @@ public class UserSystem implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final Long   id;
-    private final String login;
-    private final String password;
+    private final Long      id;
+    private final String    login;
+    private final String    password;
+    private final LocalDate dateChangePassword;
 
     public UserSystem(UserSystem value) {
         this.id = value.id;
         this.login = value.login;
         this.password = value.password;
+        this.dateChangePassword = value.dateChangePassword;
     }
 
     public UserSystem(
-        Long   id,
-        String login,
-        String password
+        Long      id,
+        String    login,
+        String    password,
+        LocalDate dateChangePassword
     ) {
         this.id = id;
         this.login = login;
         this.password = password;
+        this.dateChangePassword = dateChangePassword;
     }
 
     /**
@@ -54,6 +59,13 @@ public class UserSystem implements Serializable {
      */
     public String getPassword() {
         return this.password;
+    }
+
+    /**
+     * Getter for <code>user_system.date_change_password</code>.
+     */
+    public LocalDate getDateChangePassword() {
+        return this.dateChangePassword;
     }
 
     @Override
@@ -83,6 +95,12 @@ public class UserSystem implements Serializable {
         }
         else if (!password.equals(other.password))
             return false;
+        if (dateChangePassword == null) {
+            if (other.dateChangePassword != null)
+                return false;
+        }
+        else if (!dateChangePassword.equals(other.dateChangePassword))
+            return false;
         return true;
     }
 
@@ -93,6 +111,7 @@ public class UserSystem implements Serializable {
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         result = prime * result + ((this.login == null) ? 0 : this.login.hashCode());
         result = prime * result + ((this.password == null) ? 0 : this.password.hashCode());
+        result = prime * result + ((this.dateChangePassword == null) ? 0 : this.dateChangePassword.hashCode());
         return result;
     }
 
@@ -103,6 +122,7 @@ public class UserSystem implements Serializable {
         sb.append(id);
         sb.append(", ").append(login);
         sb.append(", ").append(password);
+        sb.append(", ").append(dateChangePassword);
 
         sb.append(")");
         return sb.toString();

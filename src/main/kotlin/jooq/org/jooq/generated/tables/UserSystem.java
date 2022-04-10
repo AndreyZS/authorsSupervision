@@ -4,12 +4,16 @@
 package org.jooq.generated.tables;
 
 
+import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
+
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row3;
+import org.jooq.Row4;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -58,6 +62,11 @@ public class UserSystem extends TableImpl<UserSystemRecord> {
      * The column <code>user_system.password</code>.
      */
     public final TableField<UserSystemRecord, String> PASSWORD = createField(DSL.name("password"), SQLDataType.VARCHAR.nullable(false), this, "");
+
+    /**
+     * The column <code>user_system.date_change_password</code>.
+     */
+    public final TableField<UserSystemRecord, LocalDate> DATE_CHANGE_PASSWORD = createField(DSL.name("date_change_password"), SQLDataType.LOCALDATE, this, "");
 
     private UserSystem(Name alias, Table<UserSystemRecord> aliased) {
         this(alias, aliased, null);
@@ -108,6 +117,11 @@ public class UserSystem extends TableImpl<UserSystemRecord> {
     }
 
     @Override
+    public List<UniqueKey<UserSystemRecord>> getUniqueKeys() {
+        return Arrays.asList(Keys.USER_SYSTEM_LOGIN_KEY);
+    }
+
+    @Override
     public UserSystem as(String alias) {
         return new UserSystem(DSL.name(alias), this);
     }
@@ -134,11 +148,11 @@ public class UserSystem extends TableImpl<UserSystemRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row3 type methods
+    // Row4 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row3<Long, String, String> fieldsRow() {
-        return (Row3) super.fieldsRow();
+    public Row4<Long, String, String, LocalDate> fieldsRow() {
+        return (Row4) super.fieldsRow();
     }
 }

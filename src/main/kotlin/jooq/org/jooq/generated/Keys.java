@@ -33,6 +33,7 @@ public class Keys {
     public static final UniqueKey<AccessRightsRecord> ACCESS_RIGHTS_PKEY = Internal.createUniqueKey(AccessRights.ACCESS_RIGHTS, DSL.name("access_rights_pkey"), new TableField[] { AccessRights.ACCESS_RIGHTS.ID }, true);
     public static final UniqueKey<AccessRightsUsersRecord> ACCESS_RIGHTS_USERS_PKEY = Internal.createUniqueKey(AccessRightsUsers.ACCESS_RIGHTS_USERS, DSL.name("access_rights_users_pkey"), new TableField[] { AccessRightsUsers.ACCESS_RIGHTS_USERS.USES_SYSTEM, AccessRightsUsers.ACCESS_RIGHTS_USERS.ACCESS_RIGHTS_ID }, true);
     public static final UniqueKey<FlywaySchemaHistoryRecord> FLYWAY_SCHEMA_HISTORY_PK = Internal.createUniqueKey(FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY, DSL.name("flyway_schema_history_pk"), new TableField[] { FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY.INSTALLED_RANK }, true);
+    public static final UniqueKey<UserSystemRecord> USER_SYSTEM_LOGIN_KEY = Internal.createUniqueKey(UserSystem.USER_SYSTEM, DSL.name("user_system_login_key"), new TableField[] { UserSystem.USER_SYSTEM.LOGIN }, true);
     public static final UniqueKey<UserSystemRecord> USER_SYSTEM_PKEY = Internal.createUniqueKey(UserSystem.USER_SYSTEM, DSL.name("user_system_pkey"), new TableField[] { UserSystem.USER_SYSTEM.ID }, true);
 
     // -------------------------------------------------------------------------

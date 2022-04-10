@@ -35,6 +35,7 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-kotlin:1.6.6")
     implementation("org.springdoc:springdoc-openapi-security:1.6.6")
     implementation("com.auth0:java-jwt:3.18.3")
+    implementation(kotlin("script-runtime"))
 }
 
 tasks.withType<KotlinCompile> {
