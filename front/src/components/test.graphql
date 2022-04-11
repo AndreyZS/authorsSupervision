@@ -1,0 +1,2948 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: query_root
+    mutation: mutation_root
+    subscription: subscription_root
+}
+
+"whether this query should be cached (Hasura Cloud only)"
+directive @cached(
+        "refresh the cache entry"
+        refresh: Boolean! = false,
+        "measured in seconds"
+        ttl: Int! = 60
+    ) on QUERY
+
+"Ответы на вопросы с одиночным или множественным выбором"
+type choice_answers {
+    created_at: timestamp!
+    id: uuid!
+    order: Int!
+    "An object relationship"
+    question: questions
+    question_id: uuid!
+    test_id: uuid!
+    "Текст варианта ответа, который будет показан пользователю"
+    text: String
+    updated_at: timestamp
+}
+
+"aggregated selection of \"choice_answers\""
+type choice_answers_aggregate {
+    aggregate: choice_answers_aggregate_fields
+    nodes: [choice_answers!]!
+}
+
+"aggregate fields of \"choice_answers\""
+type choice_answers_aggregate_fields {
+    avg: choice_answers_avg_fields
+    count(columns: [choice_answers_select_column!], distinct: Boolean): Int!
+    max: choice_answers_max_fields
+    min: choice_answers_min_fields
+    stddev: choice_answers_stddev_fields
+    stddev_pop: choice_answers_stddev_pop_fields
+    stddev_samp: choice_answers_stddev_samp_fields
+    sum: choice_answers_sum_fields
+    var_pop: choice_answers_var_pop_fields
+    var_samp: choice_answers_var_samp_fields
+    variance: choice_answers_variance_fields
+}
+
+"aggregate avg on columns"
+type choice_answers_avg_fields {
+    order: Float
+}
+
+"aggregate max on columns"
+type choice_answers_max_fields {
+    created_at: timestamp
+    id: uuid
+    order: Int
+    question_id: uuid
+    test_id: uuid
+    "Текст варианта ответа, который будет показан пользователю"
+    text: String
+    updated_at: timestamp
+}
+
+"aggregate min on columns"
+type choice_answers_min_fields {
+    created_at: timestamp
+    id: uuid
+    order: Int
+    question_id: uuid
+    test_id: uuid
+    "Текст варианта ответа, который будет показан пользователю"
+    text: String
+    updated_at: timestamp
+}
+
+"response of any mutation on the table \"choice_answers\""
+type choice_answers_mutation_response {
+    "number of rows affected by the mutation"
+    affected_rows: Int!
+    "data from the rows affected by the mutation"
+    returning: [choice_answers!]!
+}
+
+"aggregate stddev on columns"
+type choice_answers_stddev_fields {
+    order: Float
+}
+
+"aggregate stddev_pop on columns"
+type choice_answers_stddev_pop_fields {
+    order: Float
+}
+
+"aggregate stddev_samp on columns"
+type choice_answers_stddev_samp_fields {
+    order: Float
+}
+
+"aggregate sum on columns"
+type choice_answers_sum_fields {
+    order: Int
+}
+
+"aggregate var_pop on columns"
+type choice_answers_var_pop_fields {
+    order: Float
+}
+
+"aggregate var_samp on columns"
+type choice_answers_var_samp_fields {
+    order: Float
+}
+
+"aggregate variance on columns"
+type choice_answers_variance_fields {
+    order: Float
+}
+
+"mutation root"
+type mutation_root {
+    "delete data from the table: \"choice_answers\""
+    delete_choice_answers(
+        "filter the rows which have to be deleted"
+        where: choice_answers_bool_exp!
+    ): choice_answers_mutation_response
+    "delete single row from the table: \"choice_answers\""
+    delete_choice_answers_by_pk(id: uuid!, question_id: uuid!, test_id: uuid!): choice_answers
+    "delete data from the table: \"question_types\""
+    delete_question_types(
+        "filter the rows which have to be deleted"
+        where: question_types_bool_exp!
+    ): question_types_mutation_response
+    "delete single row from the table: \"question_types\""
+    delete_question_types_by_pk(value: String!): question_types
+    "delete data from the table: \"questions\""
+    delete_questions(
+        "filter the rows which have to be deleted"
+        where: questions_bool_exp!
+    ): questions_mutation_response
+    "delete single row from the table: \"questions\""
+    delete_questions_by_pk(id: uuid!, test_id: uuid!): questions
+    "delete data from the table: \"table_for_lol_kek_testing_migration_dont_use_it_please\""
+    delete_table_for_lol_kek_testing_migration_dont_use_it_please(
+        "filter the rows which have to be deleted"
+        where: table_for_lol_kek_testing_migration_dont_use_it_please_bool_exp!
+    ): table_for_lol_kek_testing_migration_dont_use_it_please_mutation_response
+    "delete single row from the table: \"table_for_lol_kek_testing_migration_dont_use_it_please\""
+    delete_table_for_lol_kek_testing_migration_dont_use_it_please_by_pk(id: uuid!): table_for_lol_kek_testing_migration_dont_use_it_please
+    "delete data from the table: \"tests\""
+    delete_tests(
+        "filter the rows which have to be deleted"
+        where: tests_bool_exp!
+    ): tests_mutation_response
+    "delete single row from the table: \"tests\""
+    delete_tests_by_pk(id: uuid!): tests
+    "delete data from the table: \"user_choice_answers\""
+    delete_user_choice_answers(
+        "filter the rows which have to be deleted"
+        where: user_choice_answers_bool_exp!
+    ): user_choice_answers_mutation_response
+    "delete single row from the table: \"user_choice_answers\""
+    delete_user_choice_answers_by_pk(
+        "Ссылка на выбранный ответ, который есть в вопросе"
+        answer_id: uuid!,
+        question_id: uuid!,
+        test_id: uuid!
+    ): user_choice_answers
+    "delete data from the table: \"user_free_form_answers\""
+    delete_user_free_form_answers(
+        "filter the rows which have to be deleted"
+        where: user_free_form_answers_bool_exp!
+    ): user_free_form_answers_mutation_response
+    "delete single row from the table: \"user_free_form_answers\""
+    delete_user_free_form_answers_by_pk(question_id: uuid!, test_id: uuid!, user_id: uuid!): user_free_form_answers
+    "delete data from the table: \"user_passed_questions\""
+    delete_user_passed_questions(
+        "filter the rows which have to be deleted"
+        where: user_passed_questions_bool_exp!
+    ): user_passed_questions_mutation_response
+    "delete single row from the table: \"user_passed_questions\""
+    delete_user_passed_questions_by_pk(question_id: uuid!, test_id: uuid!, user_id: uuid!): user_passed_questions
+    "delete data from the table: \"user_passed_tests\""
+    delete_user_passed_tests(
+        "filter the rows which have to be deleted"
+        where: user_passed_tests_bool_exp!
+    ): user_passed_tests_mutation_response
+    "delete single row from the table: \"user_passed_tests\""
+    delete_user_passed_tests_by_pk(test_id: uuid!, user_id: uuid!): user_passed_tests
+    "delete data from the table: \"user_testers\""
+    delete_user_testers(
+        "filter the rows which have to be deleted"
+        where: user_testers_bool_exp!
+    ): user_testers_mutation_response
+    "delete single row from the table: \"user_testers\""
+    delete_user_testers_by_pk(id: uuid!): user_testers
+    "insert data into the table: \"choice_answers\""
+    insert_choice_answers(
+        "the rows to be inserted"
+        objects: [choice_answers_insert_input!]!,
+        "upsert condition"
+        on_conflict: choice_answers_on_conflict
+    ): choice_answers_mutation_response
+    "insert a single row into the table: \"choice_answers\""
+    insert_choice_answers_one(
+        "the row to be inserted"
+        object: choice_answers_insert_input!,
+        "upsert condition"
+        on_conflict: choice_answers_on_conflict
+    ): choice_answers
+    "insert data into the table: \"question_types\""
+    insert_question_types(
+        "the rows to be inserted"
+        objects: [question_types_insert_input!]!,
+        "upsert condition"
+        on_conflict: question_types_on_conflict
+    ): question_types_mutation_response
+    "insert a single row into the table: \"question_types\""
+    insert_question_types_one(
+        "the row to be inserted"
+        object: question_types_insert_input!,
+        "upsert condition"
+        on_conflict: question_types_on_conflict
+    ): question_types
+    "insert data into the table: \"questions\""
+    insert_questions(
+        "the rows to be inserted"
+        objects: [questions_insert_input!]!,
+        "upsert condition"
+        on_conflict: questions_on_conflict
+    ): questions_mutation_response
+    "insert a single row into the table: \"questions\""
+    insert_questions_one(
+        "the row to be inserted"
+        object: questions_insert_input!,
+        "upsert condition"
+        on_conflict: questions_on_conflict
+    ): questions
+    "insert data into the table: \"table_for_lol_kek_testing_migration_dont_use_it_please\""
+    insert_table_for_lol_kek_testing_migration_dont_use_it_please(
+        "the rows to be inserted"
+        objects: [table_for_lol_kek_testing_migration_dont_use_it_please_insert_input!]!,
+        "upsert condition"
+        on_conflict: table_for_lol_kek_testing_migration_dont_use_it_please_on_conflict
+    ): table_for_lol_kek_testing_migration_dont_use_it_please_mutation_response
+    "insert a single row into the table: \"table_for_lol_kek_testing_migration_dont_use_it_please\""
+    insert_table_for_lol_kek_testing_migration_dont_use_it_please_one(
+        "the row to be inserted"
+        object: table_for_lol_kek_testing_migration_dont_use_it_please_insert_input!,
+        "upsert condition"
+        on_conflict: table_for_lol_kek_testing_migration_dont_use_it_please_on_conflict
+    ): table_for_lol_kek_testing_migration_dont_use_it_please
+    "insert data into the table: \"tests\""
+    insert_tests(
+        "the rows to be inserted"
+        objects: [tests_insert_input!]!,
+        "upsert condition"
+        on_conflict: tests_on_conflict
+    ): tests_mutation_response
+    "insert a single row into the table: \"tests\""
+    insert_tests_one(
+        "the row to be inserted"
+        object: tests_insert_input!,
+        "upsert condition"
+        on_conflict: tests_on_conflict
+    ): tests
+    "insert data into the table: \"user_choice_answers\""
+    insert_user_choice_answers(
+        "the rows to be inserted"
+        objects: [user_choice_answers_insert_input!]!,
+        "upsert condition"
+        on_conflict: user_choice_answers_on_conflict
+    ): user_choice_answers_mutation_response
+    "insert a single row into the table: \"user_choice_answers\""
+    insert_user_choice_answers_one(
+        "the row to be inserted"
+        object: user_choice_answers_insert_input!,
+        "upsert condition"
+        on_conflict: user_choice_answers_on_conflict
+    ): user_choice_answers
+    "insert data into the table: \"user_free_form_answers\""
+    insert_user_free_form_answers(
+        "the rows to be inserted"
+        objects: [user_free_form_answers_insert_input!]!,
+        "upsert condition"
+        on_conflict: user_free_form_answers_on_conflict
+    ): user_free_form_answers_mutation_response
+    "insert a single row into the table: \"user_free_form_answers\""
+    insert_user_free_form_answers_one(
+        "the row to be inserted"
+        object: user_free_form_answers_insert_input!,
+        "upsert condition"
+        on_conflict: user_free_form_answers_on_conflict
+    ): user_free_form_answers
+    "insert data into the table: \"user_passed_questions\""
+    insert_user_passed_questions(
+        "the rows to be inserted"
+        objects: [user_passed_questions_insert_input!]!,
+        "upsert condition"
+        on_conflict: user_passed_questions_on_conflict
+    ): user_passed_questions_mutation_response
+    "insert a single row into the table: \"user_passed_questions\""
+    insert_user_passed_questions_one(
+        "the row to be inserted"
+        object: user_passed_questions_insert_input!,
+        "upsert condition"
+        on_conflict: user_passed_questions_on_conflict
+    ): user_passed_questions
+    "insert data into the table: \"user_passed_tests\""
+    insert_user_passed_tests(
+        "the rows to be inserted"
+        objects: [user_passed_tests_insert_input!]!,
+        "upsert condition"
+        on_conflict: user_passed_tests_on_conflict
+    ): user_passed_tests_mutation_response
+    "insert a single row into the table: \"user_passed_tests\""
+    insert_user_passed_tests_one(
+        "the row to be inserted"
+        object: user_passed_tests_insert_input!,
+        "upsert condition"
+        on_conflict: user_passed_tests_on_conflict
+    ): user_passed_tests
+    "insert data into the table: \"user_testers\""
+    insert_user_testers(
+        "the rows to be inserted"
+        objects: [user_testers_insert_input!]!,
+        "upsert condition"
+        on_conflict: user_testers_on_conflict
+    ): user_testers_mutation_response
+    "insert a single row into the table: \"user_testers\""
+    insert_user_testers_one(
+        "the row to be inserted"
+        object: user_testers_insert_input!,
+        "upsert condition"
+        on_conflict: user_testers_on_conflict
+    ): user_testers
+    "update data of the table: \"choice_answers\""
+    update_choice_answers(
+        "increments the numeric columns with given value of the filtered values"
+        _inc: choice_answers_inc_input,
+        "sets the columns of the filtered rows to the given values"
+        _set: choice_answers_set_input,
+        "filter the rows which have to be updated"
+        where: choice_answers_bool_exp!
+    ): choice_answers_mutation_response
+    "update single row of the table: \"choice_answers\""
+    update_choice_answers_by_pk(
+        "increments the numeric columns with given value of the filtered values"
+        _inc: choice_answers_inc_input,
+        "sets the columns of the filtered rows to the given values"
+        _set: choice_answers_set_input,
+        pk_columns: choice_answers_pk_columns_input!
+    ): choice_answers
+    "update data of the table: \"question_types\""
+    update_question_types(
+        "sets the columns of the filtered rows to the given values"
+        _set: question_types_set_input,
+        "filter the rows which have to be updated"
+        where: question_types_bool_exp!
+    ): question_types_mutation_response
+    "update single row of the table: \"question_types\""
+    update_question_types_by_pk(
+        "sets the columns of the filtered rows to the given values"
+        _set: question_types_set_input,
+        pk_columns: question_types_pk_columns_input!
+    ): question_types
+    "update data of the table: \"questions\""
+    update_questions(
+        "increments the numeric columns with given value of the filtered values"
+        _inc: questions_inc_input,
+        "sets the columns of the filtered rows to the given values"
+        _set: questions_set_input,
+        "filter the rows which have to be updated"
+        where: questions_bool_exp!
+    ): questions_mutation_response
+    "update single row of the table: \"questions\""
+    update_questions_by_pk(
+        "increments the numeric columns with given value of the filtered values"
+        _inc: questions_inc_input,
+        "sets the columns of the filtered rows to the given values"
+        _set: questions_set_input,
+        pk_columns: questions_pk_columns_input!
+    ): questions
+    "update data of the table: \"table_for_lol_kek_testing_migration_dont_use_it_please\""
+    update_table_for_lol_kek_testing_migration_dont_use_it_please(
+        "sets the columns of the filtered rows to the given values"
+        _set: table_for_lol_kek_testing_migration_dont_use_it_please_set_input,
+        "filter the rows which have to be updated"
+        where: table_for_lol_kek_testing_migration_dont_use_it_please_bool_exp!
+    ): table_for_lol_kek_testing_migration_dont_use_it_please_mutation_response
+    "update single row of the table: \"table_for_lol_kek_testing_migration_dont_use_it_please\""
+    update_table_for_lol_kek_testing_migration_dont_use_it_please_by_pk(
+        "sets the columns of the filtered rows to the given values"
+        _set: table_for_lol_kek_testing_migration_dont_use_it_please_set_input,
+        pk_columns: table_for_lol_kek_testing_migration_dont_use_it_please_pk_columns_input!
+    ): table_for_lol_kek_testing_migration_dont_use_it_please
+    "update data of the table: \"tests\""
+    update_tests(
+        "sets the columns of the filtered rows to the given values"
+        _set: tests_set_input,
+        "filter the rows which have to be updated"
+        where: tests_bool_exp!
+    ): tests_mutation_response
+    "update single row of the table: \"tests\""
+    update_tests_by_pk(
+        "sets the columns of the filtered rows to the given values"
+        _set: tests_set_input,
+        pk_columns: tests_pk_columns_input!
+    ): tests
+    "update data of the table: \"user_choice_answers\""
+    update_user_choice_answers(
+        "sets the columns of the filtered rows to the given values"
+        _set: user_choice_answers_set_input,
+        "filter the rows which have to be updated"
+        where: user_choice_answers_bool_exp!
+    ): user_choice_answers_mutation_response
+    "update single row of the table: \"user_choice_answers\""
+    update_user_choice_answers_by_pk(
+        "sets the columns of the filtered rows to the given values"
+        _set: user_choice_answers_set_input,
+        pk_columns: user_choice_answers_pk_columns_input!
+    ): user_choice_answers
+    "update data of the table: \"user_free_form_answers\""
+    update_user_free_form_answers(
+        "sets the columns of the filtered rows to the given values"
+        _set: user_free_form_answers_set_input,
+        "filter the rows which have to be updated"
+        where: user_free_form_answers_bool_exp!
+    ): user_free_form_answers_mutation_response
+    "update single row of the table: \"user_free_form_answers\""
+    update_user_free_form_answers_by_pk(
+        "sets the columns of the filtered rows to the given values"
+        _set: user_free_form_answers_set_input,
+        pk_columns: user_free_form_answers_pk_columns_input!
+    ): user_free_form_answers
+    "update data of the table: \"user_passed_questions\""
+    update_user_passed_questions(
+        "sets the columns of the filtered rows to the given values"
+        _set: user_passed_questions_set_input,
+        "filter the rows which have to be updated"
+        where: user_passed_questions_bool_exp!
+    ): user_passed_questions_mutation_response
+    "update single row of the table: \"user_passed_questions\""
+    update_user_passed_questions_by_pk(
+        "sets the columns of the filtered rows to the given values"
+        _set: user_passed_questions_set_input,
+        pk_columns: user_passed_questions_pk_columns_input!
+    ): user_passed_questions
+    "update data of the table: \"user_passed_tests\""
+    update_user_passed_tests(
+        "sets the columns of the filtered rows to the given values"
+        _set: user_passed_tests_set_input,
+        "filter the rows which have to be updated"
+        where: user_passed_tests_bool_exp!
+    ): user_passed_tests_mutation_response
+    "update single row of the table: \"user_passed_tests\""
+    update_user_passed_tests_by_pk(
+        "sets the columns of the filtered rows to the given values"
+        _set: user_passed_tests_set_input,
+        pk_columns: user_passed_tests_pk_columns_input!
+    ): user_passed_tests
+    "update data of the table: \"user_testers\""
+    update_user_testers(
+        "sets the columns of the filtered rows to the given values"
+        _set: user_testers_set_input,
+        "filter the rows which have to be updated"
+        where: user_testers_bool_exp!
+    ): user_testers_mutation_response
+    "update single row of the table: \"user_testers\""
+    update_user_testers_by_pk(
+        "sets the columns of the filtered rows to the given values"
+        _set: user_testers_set_input,
+        pk_columns: user_testers_pk_columns_input!
+    ): user_testers
+}
+
+type query_root {
+    "An array relationship"
+    choice_answers(
+        "distinct select on columns"
+        distinct_on: [choice_answers_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [choice_answers_order_by!],
+        "filter the rows returned"
+        where: choice_answers_bool_exp
+    ): [choice_answers!]!
+    "An aggregate relationship"
+    choice_answers_aggregate(
+        "distinct select on columns"
+        distinct_on: [choice_answers_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [choice_answers_order_by!],
+        "filter the rows returned"
+        where: choice_answers_bool_exp
+    ): choice_answers_aggregate!
+    "fetch data from the table: \"choice_answers\" using primary key columns"
+    choice_answers_by_pk(id: uuid!, question_id: uuid!, test_id: uuid!): choice_answers
+    "fetch data from the table: \"question_types\""
+    question_types(
+        "distinct select on columns"
+        distinct_on: [question_types_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [question_types_order_by!],
+        "filter the rows returned"
+        where: question_types_bool_exp
+    ): [question_types!]!
+    "fetch aggregated fields from the table: \"question_types\""
+    question_types_aggregate(
+        "distinct select on columns"
+        distinct_on: [question_types_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [question_types_order_by!],
+        "filter the rows returned"
+        where: question_types_bool_exp
+    ): question_types_aggregate!
+    "fetch data from the table: \"question_types\" using primary key columns"
+    question_types_by_pk(value: String!): question_types
+    "An array relationship"
+    questions(
+        "distinct select on columns"
+        distinct_on: [questions_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [questions_order_by!],
+        "filter the rows returned"
+        where: questions_bool_exp
+    ): [questions!]!
+    "An aggregate relationship"
+    questions_aggregate(
+        "distinct select on columns"
+        distinct_on: [questions_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [questions_order_by!],
+        "filter the rows returned"
+        where: questions_bool_exp
+    ): questions_aggregate!
+    "fetch data from the table: \"questions\" using primary key columns"
+    questions_by_pk(id: uuid!, test_id: uuid!): questions
+    "fetch data from the table: \"table_for_lol_kek_testing_migration_dont_use_it_please\""
+    table_for_lol_kek_testing_migration_dont_use_it_please(
+        "distinct select on columns"
+        distinct_on: [table_for_lol_kek_testing_migration_dont_use_it_please_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [table_for_lol_kek_testing_migration_dont_use_it_please_order_by!],
+        "filter the rows returned"
+        where: table_for_lol_kek_testing_migration_dont_use_it_please_bool_exp
+    ): [table_for_lol_kek_testing_migration_dont_use_it_please!]!
+    "fetch aggregated fields from the table: \"table_for_lol_kek_testing_migration_dont_use_it_please\""
+    table_for_lol_kek_testing_migration_dont_use_it_please_aggregate(
+        "distinct select on columns"
+        distinct_on: [table_for_lol_kek_testing_migration_dont_use_it_please_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [table_for_lol_kek_testing_migration_dont_use_it_please_order_by!],
+        "filter the rows returned"
+        where: table_for_lol_kek_testing_migration_dont_use_it_please_bool_exp
+    ): table_for_lol_kek_testing_migration_dont_use_it_please_aggregate!
+    "fetch data from the table: \"table_for_lol_kek_testing_migration_dont_use_it_please\" using primary key columns"
+    table_for_lol_kek_testing_migration_dont_use_it_please_by_pk(id: uuid!): table_for_lol_kek_testing_migration_dont_use_it_please
+    "fetch data from the table: \"tests\""
+    tests(
+        "distinct select on columns"
+        distinct_on: [tests_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [tests_order_by!],
+        "filter the rows returned"
+        where: tests_bool_exp
+    ): [tests!]!
+    "fetch aggregated fields from the table: \"tests\""
+    tests_aggregate(
+        "distinct select on columns"
+        distinct_on: [tests_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [tests_order_by!],
+        "filter the rows returned"
+        where: tests_bool_exp
+    ): tests_aggregate!
+    "fetch data from the table: \"tests\" using primary key columns"
+    tests_by_pk(id: uuid!): tests
+    "An array relationship"
+    user_choice_answers(
+        "distinct select on columns"
+        distinct_on: [user_choice_answers_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_choice_answers_order_by!],
+        "filter the rows returned"
+        where: user_choice_answers_bool_exp
+    ): [user_choice_answers!]!
+    "An aggregate relationship"
+    user_choice_answers_aggregate(
+        "distinct select on columns"
+        distinct_on: [user_choice_answers_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_choice_answers_order_by!],
+        "filter the rows returned"
+        where: user_choice_answers_bool_exp
+    ): user_choice_answers_aggregate!
+    "fetch data from the table: \"user_choice_answers\" using primary key columns"
+    user_choice_answers_by_pk(
+        "Ссылка на выбранный ответ, который есть в вопросе"
+        answer_id: uuid!,
+        question_id: uuid!,
+        test_id: uuid!
+    ): user_choice_answers
+    "fetch data from the table: \"user_free_form_answers\""
+    user_free_form_answers(
+        "distinct select on columns"
+        distinct_on: [user_free_form_answers_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_free_form_answers_order_by!],
+        "filter the rows returned"
+        where: user_free_form_answers_bool_exp
+    ): [user_free_form_answers!]!
+    "fetch aggregated fields from the table: \"user_free_form_answers\""
+    user_free_form_answers_aggregate(
+        "distinct select on columns"
+        distinct_on: [user_free_form_answers_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_free_form_answers_order_by!],
+        "filter the rows returned"
+        where: user_free_form_answers_bool_exp
+    ): user_free_form_answers_aggregate!
+    "fetch data from the table: \"user_free_form_answers\" using primary key columns"
+    user_free_form_answers_by_pk(question_id: uuid!, test_id: uuid!, user_id: uuid!): user_free_form_answers
+    "An array relationship"
+    user_passed_questions(
+        "distinct select on columns"
+        distinct_on: [user_passed_questions_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_passed_questions_order_by!],
+        "filter the rows returned"
+        where: user_passed_questions_bool_exp
+    ): [user_passed_questions!]!
+    "An aggregate relationship"
+    user_passed_questions_aggregate(
+        "distinct select on columns"
+        distinct_on: [user_passed_questions_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_passed_questions_order_by!],
+        "filter the rows returned"
+        where: user_passed_questions_bool_exp
+    ): user_passed_questions_aggregate!
+    "fetch data from the table: \"user_passed_questions\" using primary key columns"
+    user_passed_questions_by_pk(question_id: uuid!, test_id: uuid!, user_id: uuid!): user_passed_questions
+    "An array relationship"
+    user_passed_tests(
+        "distinct select on columns"
+        distinct_on: [user_passed_tests_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_passed_tests_order_by!],
+        "filter the rows returned"
+        where: user_passed_tests_bool_exp
+    ): [user_passed_tests!]!
+    "An aggregate relationship"
+    user_passed_tests_aggregate(
+        "distinct select on columns"
+        distinct_on: [user_passed_tests_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_passed_tests_order_by!],
+        "filter the rows returned"
+        where: user_passed_tests_bool_exp
+    ): user_passed_tests_aggregate!
+    "fetch data from the table: \"user_passed_tests\" using primary key columns"
+    user_passed_tests_by_pk(test_id: uuid!, user_id: uuid!): user_passed_tests
+    "fetch data from the table: \"user_testers\""
+    user_testers(
+        "distinct select on columns"
+        distinct_on: [user_testers_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_testers_order_by!],
+        "filter the rows returned"
+        where: user_testers_bool_exp
+    ): [user_testers!]!
+    "fetch aggregated fields from the table: \"user_testers\""
+    user_testers_aggregate(
+        "distinct select on columns"
+        distinct_on: [user_testers_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_testers_order_by!],
+        "filter the rows returned"
+        where: user_testers_bool_exp
+    ): user_testers_aggregate!
+    "fetch data from the table: \"user_testers\" using primary key columns"
+    user_testers_by_pk(id: uuid!): user_testers
+}
+
+"Виды вопросов (множественный выбор, одиночный выбор, свободная форма и т.п.)"
+type question_types {
+    description: String
+    value: String!
+}
+
+"aggregated selection of \"question_types\""
+type question_types_aggregate {
+    aggregate: question_types_aggregate_fields
+    nodes: [question_types!]!
+}
+
+"aggregate fields of \"question_types\""
+type question_types_aggregate_fields {
+    count(columns: [question_types_select_column!], distinct: Boolean): Int!
+    max: question_types_max_fields
+    min: question_types_min_fields
+}
+
+"aggregate max on columns"
+type question_types_max_fields {
+    description: String
+    value: String
+}
+
+"aggregate min on columns"
+type question_types_min_fields {
+    description: String
+    value: String
+}
+
+"response of any mutation on the table \"question_types\""
+type question_types_mutation_response {
+    "number of rows affected by the mutation"
+    affected_rows: Int!
+    "data from the rows affected by the mutation"
+    returning: [question_types!]!
+}
+
+"Вопросы, привязанные к тестам"
+type questions {
+    "An array relationship"
+    choice_answers(
+        "distinct select on columns"
+        distinct_on: [choice_answers_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [choice_answers_order_by!],
+        "filter the rows returned"
+        where: choice_answers_bool_exp
+    ): [choice_answers!]!
+    "An aggregate relationship"
+    choice_answers_aggregate(
+        "distinct select on columns"
+        distinct_on: [choice_answers_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [choice_answers_order_by!],
+        "filter the rows returned"
+        where: choice_answers_bool_exp
+    ): choice_answers_aggregate!
+    created_at: timestamp!
+    id: uuid!
+    "Порядковый номер вопроса в тесте"
+    order: Int!
+    "Тип вопроса (выбор одного варианта ответа, свободная форма и т.п.)"
+    question_type: question_types_enum!
+    "An object relationship"
+    test: tests!
+    test_id: uuid!
+    "Текст вопроса, который будет показан пользователю во время прохождения теста"
+    text: String!
+    updated_at: timestamp
+}
+
+"aggregated selection of \"questions\""
+type questions_aggregate {
+    aggregate: questions_aggregate_fields
+    nodes: [questions!]!
+}
+
+"aggregate fields of \"questions\""
+type questions_aggregate_fields {
+    avg: questions_avg_fields
+    count(columns: [questions_select_column!], distinct: Boolean): Int!
+    max: questions_max_fields
+    min: questions_min_fields
+    stddev: questions_stddev_fields
+    stddev_pop: questions_stddev_pop_fields
+    stddev_samp: questions_stddev_samp_fields
+    sum: questions_sum_fields
+    var_pop: questions_var_pop_fields
+    var_samp: questions_var_samp_fields
+    variance: questions_variance_fields
+}
+
+"aggregate avg on columns"
+type questions_avg_fields {
+    "Порядковый номер вопроса в тесте"
+    order: Float
+}
+
+"aggregate max on columns"
+type questions_max_fields {
+    created_at: timestamp
+    id: uuid
+    "Порядковый номер вопроса в тесте"
+    order: Int
+    test_id: uuid
+    "Текст вопроса, который будет показан пользователю во время прохождения теста"
+    text: String
+    updated_at: timestamp
+}
+
+"aggregate min on columns"
+type questions_min_fields {
+    created_at: timestamp
+    id: uuid
+    "Порядковый номер вопроса в тесте"
+    order: Int
+    test_id: uuid
+    "Текст вопроса, который будет показан пользователю во время прохождения теста"
+    text: String
+    updated_at: timestamp
+}
+
+"response of any mutation on the table \"questions\""
+type questions_mutation_response {
+    "number of rows affected by the mutation"
+    affected_rows: Int!
+    "data from the rows affected by the mutation"
+    returning: [questions!]!
+}
+
+"aggregate stddev on columns"
+type questions_stddev_fields {
+    "Порядковый номер вопроса в тесте"
+    order: Float
+}
+
+"aggregate stddev_pop on columns"
+type questions_stddev_pop_fields {
+    "Порядковый номер вопроса в тесте"
+    order: Float
+}
+
+"aggregate stddev_samp on columns"
+type questions_stddev_samp_fields {
+    "Порядковый номер вопроса в тесте"
+    order: Float
+}
+
+"aggregate sum on columns"
+type questions_sum_fields {
+    "Порядковый номер вопроса в тесте"
+    order: Int
+}
+
+"aggregate var_pop on columns"
+type questions_var_pop_fields {
+    "Порядковый номер вопроса в тесте"
+    order: Float
+}
+
+"aggregate var_samp on columns"
+type questions_var_samp_fields {
+    "Порядковый номер вопроса в тесте"
+    order: Float
+}
+
+"aggregate variance on columns"
+type questions_variance_fields {
+    "Порядковый номер вопроса в тесте"
+    order: Float
+}
+
+type subscription_root {
+    "An array relationship"
+    choice_answers(
+        "distinct select on columns"
+        distinct_on: [choice_answers_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [choice_answers_order_by!],
+        "filter the rows returned"
+        where: choice_answers_bool_exp
+    ): [choice_answers!]!
+    "An aggregate relationship"
+    choice_answers_aggregate(
+        "distinct select on columns"
+        distinct_on: [choice_answers_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [choice_answers_order_by!],
+        "filter the rows returned"
+        where: choice_answers_bool_exp
+    ): choice_answers_aggregate!
+    "fetch data from the table: \"choice_answers\" using primary key columns"
+    choice_answers_by_pk(id: uuid!, question_id: uuid!, test_id: uuid!): choice_answers
+    "fetch data from the table: \"question_types\""
+    question_types(
+        "distinct select on columns"
+        distinct_on: [question_types_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [question_types_order_by!],
+        "filter the rows returned"
+        where: question_types_bool_exp
+    ): [question_types!]!
+    "fetch aggregated fields from the table: \"question_types\""
+    question_types_aggregate(
+        "distinct select on columns"
+        distinct_on: [question_types_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [question_types_order_by!],
+        "filter the rows returned"
+        where: question_types_bool_exp
+    ): question_types_aggregate!
+    "fetch data from the table: \"question_types\" using primary key columns"
+    question_types_by_pk(value: String!): question_types
+    "An array relationship"
+    questions(
+        "distinct select on columns"
+        distinct_on: [questions_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [questions_order_by!],
+        "filter the rows returned"
+        where: questions_bool_exp
+    ): [questions!]!
+    "An aggregate relationship"
+    questions_aggregate(
+        "distinct select on columns"
+        distinct_on: [questions_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [questions_order_by!],
+        "filter the rows returned"
+        where: questions_bool_exp
+    ): questions_aggregate!
+    "fetch data from the table: \"questions\" using primary key columns"
+    questions_by_pk(id: uuid!, test_id: uuid!): questions
+    "fetch data from the table: \"table_for_lol_kek_testing_migration_dont_use_it_please\""
+    table_for_lol_kek_testing_migration_dont_use_it_please(
+        "distinct select on columns"
+        distinct_on: [table_for_lol_kek_testing_migration_dont_use_it_please_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [table_for_lol_kek_testing_migration_dont_use_it_please_order_by!],
+        "filter the rows returned"
+        where: table_for_lol_kek_testing_migration_dont_use_it_please_bool_exp
+    ): [table_for_lol_kek_testing_migration_dont_use_it_please!]!
+    "fetch aggregated fields from the table: \"table_for_lol_kek_testing_migration_dont_use_it_please\""
+    table_for_lol_kek_testing_migration_dont_use_it_please_aggregate(
+        "distinct select on columns"
+        distinct_on: [table_for_lol_kek_testing_migration_dont_use_it_please_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [table_for_lol_kek_testing_migration_dont_use_it_please_order_by!],
+        "filter the rows returned"
+        where: table_for_lol_kek_testing_migration_dont_use_it_please_bool_exp
+    ): table_for_lol_kek_testing_migration_dont_use_it_please_aggregate!
+    "fetch data from the table: \"table_for_lol_kek_testing_migration_dont_use_it_please\" using primary key columns"
+    table_for_lol_kek_testing_migration_dont_use_it_please_by_pk(id: uuid!): table_for_lol_kek_testing_migration_dont_use_it_please
+    "fetch data from the table: \"tests\""
+    tests(
+        "distinct select on columns"
+        distinct_on: [tests_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [tests_order_by!],
+        "filter the rows returned"
+        where: tests_bool_exp
+    ): [tests!]!
+    "fetch aggregated fields from the table: \"tests\""
+    tests_aggregate(
+        "distinct select on columns"
+        distinct_on: [tests_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [tests_order_by!],
+        "filter the rows returned"
+        where: tests_bool_exp
+    ): tests_aggregate!
+    "fetch data from the table: \"tests\" using primary key columns"
+    tests_by_pk(id: uuid!): tests
+    "An array relationship"
+    user_choice_answers(
+        "distinct select on columns"
+        distinct_on: [user_choice_answers_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_choice_answers_order_by!],
+        "filter the rows returned"
+        where: user_choice_answers_bool_exp
+    ): [user_choice_answers!]!
+    "An aggregate relationship"
+    user_choice_answers_aggregate(
+        "distinct select on columns"
+        distinct_on: [user_choice_answers_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_choice_answers_order_by!],
+        "filter the rows returned"
+        where: user_choice_answers_bool_exp
+    ): user_choice_answers_aggregate!
+    "fetch data from the table: \"user_choice_answers\" using primary key columns"
+    user_choice_answers_by_pk(
+        "Ссылка на выбранный ответ, который есть в вопросе"
+        answer_id: uuid!,
+        question_id: uuid!,
+        test_id: uuid!
+    ): user_choice_answers
+    "fetch data from the table: \"user_free_form_answers\""
+    user_free_form_answers(
+        "distinct select on columns"
+        distinct_on: [user_free_form_answers_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_free_form_answers_order_by!],
+        "filter the rows returned"
+        where: user_free_form_answers_bool_exp
+    ): [user_free_form_answers!]!
+    "fetch aggregated fields from the table: \"user_free_form_answers\""
+    user_free_form_answers_aggregate(
+        "distinct select on columns"
+        distinct_on: [user_free_form_answers_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_free_form_answers_order_by!],
+        "filter the rows returned"
+        where: user_free_form_answers_bool_exp
+    ): user_free_form_answers_aggregate!
+    "fetch data from the table: \"user_free_form_answers\" using primary key columns"
+    user_free_form_answers_by_pk(question_id: uuid!, test_id: uuid!, user_id: uuid!): user_free_form_answers
+    "An array relationship"
+    user_passed_questions(
+        "distinct select on columns"
+        distinct_on: [user_passed_questions_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_passed_questions_order_by!],
+        "filter the rows returned"
+        where: user_passed_questions_bool_exp
+    ): [user_passed_questions!]!
+    "An aggregate relationship"
+    user_passed_questions_aggregate(
+        "distinct select on columns"
+        distinct_on: [user_passed_questions_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_passed_questions_order_by!],
+        "filter the rows returned"
+        where: user_passed_questions_bool_exp
+    ): user_passed_questions_aggregate!
+    "fetch data from the table: \"user_passed_questions\" using primary key columns"
+    user_passed_questions_by_pk(question_id: uuid!, test_id: uuid!, user_id: uuid!): user_passed_questions
+    "An array relationship"
+    user_passed_tests(
+        "distinct select on columns"
+        distinct_on: [user_passed_tests_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_passed_tests_order_by!],
+        "filter the rows returned"
+        where: user_passed_tests_bool_exp
+    ): [user_passed_tests!]!
+    "An aggregate relationship"
+    user_passed_tests_aggregate(
+        "distinct select on columns"
+        distinct_on: [user_passed_tests_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_passed_tests_order_by!],
+        "filter the rows returned"
+        where: user_passed_tests_bool_exp
+    ): user_passed_tests_aggregate!
+    "fetch data from the table: \"user_passed_tests\" using primary key columns"
+    user_passed_tests_by_pk(test_id: uuid!, user_id: uuid!): user_passed_tests
+    "fetch data from the table: \"user_testers\""
+    user_testers(
+        "distinct select on columns"
+        distinct_on: [user_testers_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_testers_order_by!],
+        "filter the rows returned"
+        where: user_testers_bool_exp
+    ): [user_testers!]!
+    "fetch aggregated fields from the table: \"user_testers\""
+    user_testers_aggregate(
+        "distinct select on columns"
+        distinct_on: [user_testers_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_testers_order_by!],
+        "filter the rows returned"
+        where: user_testers_bool_exp
+    ): user_testers_aggregate!
+    "fetch data from the table: \"user_testers\" using primary key columns"
+    user_testers_by_pk(id: uuid!): user_testers
+}
+
+"columns and relationships of \"table_for_lol_kek_testing_migration_dont_use_it_please\""
+type table_for_lol_kek_testing_migration_dont_use_it_please {
+    id: uuid!
+}
+
+"aggregated selection of \"table_for_lol_kek_testing_migration_dont_use_it_please\""
+type table_for_lol_kek_testing_migration_dont_use_it_please_aggregate {
+    aggregate: table_for_lol_kek_testing_migration_dont_use_it_please_aggregate_fields
+    nodes: [table_for_lol_kek_testing_migration_dont_use_it_please!]!
+}
+
+"aggregate fields of \"table_for_lol_kek_testing_migration_dont_use_it_please\""
+type table_for_lol_kek_testing_migration_dont_use_it_please_aggregate_fields {
+    count(columns: [table_for_lol_kek_testing_migration_dont_use_it_please_select_column!], distinct: Boolean): Int!
+    max: table_for_lol_kek_testing_migration_dont_use_it_please_max_fields
+    min: table_for_lol_kek_testing_migration_dont_use_it_please_min_fields
+}
+
+"aggregate max on columns"
+type table_for_lol_kek_testing_migration_dont_use_it_please_max_fields {
+    id: uuid
+}
+
+"aggregate min on columns"
+type table_for_lol_kek_testing_migration_dont_use_it_please_min_fields {
+    id: uuid
+}
+
+"response of any mutation on the table \"table_for_lol_kek_testing_migration_dont_use_it_please\""
+type table_for_lol_kek_testing_migration_dont_use_it_please_mutation_response {
+    "number of rows affected by the mutation"
+    affected_rows: Int!
+    "data from the rows affected by the mutation"
+    returning: [table_for_lol_kek_testing_migration_dont_use_it_please!]!
+}
+
+"Список тестов в системе"
+type tests {
+    created_at: timestamp!
+    description: String
+    id: uuid!
+    name: String!
+    "An array relationship"
+    questions(
+        "distinct select on columns"
+        distinct_on: [questions_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [questions_order_by!],
+        "filter the rows returned"
+        where: questions_bool_exp
+    ): [questions!]!
+    "An aggregate relationship"
+    questions_aggregate(
+        "distinct select on columns"
+        distinct_on: [questions_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [questions_order_by!],
+        "filter the rows returned"
+        where: questions_bool_exp
+    ): questions_aggregate!
+    updated_at: timestamp
+    "An array relationship"
+    user_passed_tests(
+        "distinct select on columns"
+        distinct_on: [user_passed_tests_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_passed_tests_order_by!],
+        "filter the rows returned"
+        where: user_passed_tests_bool_exp
+    ): [user_passed_tests!]!
+    "An aggregate relationship"
+    user_passed_tests_aggregate(
+        "distinct select on columns"
+        distinct_on: [user_passed_tests_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_passed_tests_order_by!],
+        "filter the rows returned"
+        where: user_passed_tests_bool_exp
+    ): user_passed_tests_aggregate!
+}
+
+"aggregated selection of \"tests\""
+type tests_aggregate {
+    aggregate: tests_aggregate_fields
+    nodes: [tests!]!
+}
+
+"aggregate fields of \"tests\""
+type tests_aggregate_fields {
+    count(columns: [tests_select_column!], distinct: Boolean): Int!
+    max: tests_max_fields
+    min: tests_min_fields
+}
+
+"aggregate max on columns"
+type tests_max_fields {
+    created_at: timestamp
+    description: String
+    id: uuid
+    name: String
+    updated_at: timestamp
+}
+
+"aggregate min on columns"
+type tests_min_fields {
+    created_at: timestamp
+    description: String
+    id: uuid
+    name: String
+    updated_at: timestamp
+}
+
+"response of any mutation on the table \"tests\""
+type tests_mutation_response {
+    "number of rows affected by the mutation"
+    affected_rows: Int!
+    "data from the rows affected by the mutation"
+    returning: [tests!]!
+}
+
+"Ответы пользователей на вопросы с выбором ответов (как одиночные, так и множественные) "
+type user_choice_answers {
+    "An object relationship"
+    answer: choice_answers
+    "Ссылка на выбранный ответ, который есть в вопросе"
+    answer_id: uuid!
+    question_id: uuid!
+    test_id: uuid!
+    user_id: uuid!
+}
+
+"aggregated selection of \"user_choice_answers\""
+type user_choice_answers_aggregate {
+    aggregate: user_choice_answers_aggregate_fields
+    nodes: [user_choice_answers!]!
+}
+
+"aggregate fields of \"user_choice_answers\""
+type user_choice_answers_aggregate_fields {
+    count(columns: [user_choice_answers_select_column!], distinct: Boolean): Int!
+    max: user_choice_answers_max_fields
+    min: user_choice_answers_min_fields
+}
+
+"aggregate max on columns"
+type user_choice_answers_max_fields {
+    "Ссылка на выбранный ответ, который есть в вопросе"
+    answer_id: uuid
+    question_id: uuid
+    test_id: uuid
+    user_id: uuid
+}
+
+"aggregate min on columns"
+type user_choice_answers_min_fields {
+    "Ссылка на выбранный ответ, который есть в вопросе"
+    answer_id: uuid
+    question_id: uuid
+    test_id: uuid
+    user_id: uuid
+}
+
+"response of any mutation on the table \"user_choice_answers\""
+type user_choice_answers_mutation_response {
+    "number of rows affected by the mutation"
+    affected_rows: Int!
+    "data from the rows affected by the mutation"
+    returning: [user_choice_answers!]!
+}
+
+"Ответы пользователей в свободной форме"
+type user_free_form_answers {
+    question_id: uuid!
+    test_id: uuid!
+    "Текст ответа, данного в свободной форме"
+    text: String
+    user_id: uuid!
+    "An object relationship"
+    user_passed_question: user_passed_questions
+}
+
+"aggregated selection of \"user_free_form_answers\""
+type user_free_form_answers_aggregate {
+    aggregate: user_free_form_answers_aggregate_fields
+    nodes: [user_free_form_answers!]!
+}
+
+"aggregate fields of \"user_free_form_answers\""
+type user_free_form_answers_aggregate_fields {
+    count(columns: [user_free_form_answers_select_column!], distinct: Boolean): Int!
+    max: user_free_form_answers_max_fields
+    min: user_free_form_answers_min_fields
+}
+
+"aggregate max on columns"
+type user_free_form_answers_max_fields {
+    question_id: uuid
+    test_id: uuid
+    "Текст ответа, данного в свободной форме"
+    text: String
+    user_id: uuid
+}
+
+"aggregate min on columns"
+type user_free_form_answers_min_fields {
+    question_id: uuid
+    test_id: uuid
+    "Текст ответа, данного в свободной форме"
+    text: String
+    user_id: uuid
+}
+
+"response of any mutation on the table \"user_free_form_answers\""
+type user_free_form_answers_mutation_response {
+    "number of rows affected by the mutation"
+    affected_rows: Int!
+    "data from the rows affected by the mutation"
+    returning: [user_free_form_answers!]!
+}
+
+"columns and relationships of \"user_passed_questions\""
+type user_passed_questions {
+    answer_date: timestamp
+    "An object relationship"
+    question: questions
+    question_id: uuid!
+    test_id: uuid!
+    "An array relationship"
+    user_choice_answers(
+        "distinct select on columns"
+        distinct_on: [user_choice_answers_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_choice_answers_order_by!],
+        "filter the rows returned"
+        where: user_choice_answers_bool_exp
+    ): [user_choice_answers!]!
+    "An aggregate relationship"
+    user_choice_answers_aggregate(
+        "distinct select on columns"
+        distinct_on: [user_choice_answers_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_choice_answers_order_by!],
+        "filter the rows returned"
+        where: user_choice_answers_bool_exp
+    ): user_choice_answers_aggregate!
+    "An object relationship"
+    user_free_form_answer: user_free_form_answers
+    user_id: uuid!
+}
+
+"aggregated selection of \"user_passed_questions\""
+type user_passed_questions_aggregate {
+    aggregate: user_passed_questions_aggregate_fields
+    nodes: [user_passed_questions!]!
+}
+
+"aggregate fields of \"user_passed_questions\""
+type user_passed_questions_aggregate_fields {
+    count(columns: [user_passed_questions_select_column!], distinct: Boolean): Int!
+    max: user_passed_questions_max_fields
+    min: user_passed_questions_min_fields
+}
+
+"aggregate max on columns"
+type user_passed_questions_max_fields {
+    answer_date: timestamp
+    question_id: uuid
+    test_id: uuid
+    user_id: uuid
+}
+
+"aggregate min on columns"
+type user_passed_questions_min_fields {
+    answer_date: timestamp
+    question_id: uuid
+    test_id: uuid
+    user_id: uuid
+}
+
+"response of any mutation on the table \"user_passed_questions\""
+type user_passed_questions_mutation_response {
+    "number of rows affected by the mutation"
+    affected_rows: Int!
+    "data from the rows affected by the mutation"
+    returning: [user_passed_questions!]!
+}
+
+"Данные о ПРОЙДЕННЫХ тестированиях пользователями"
+type user_passed_tests {
+    end_date: time!
+    start_date: time!
+    "An object relationship"
+    test: tests!
+    test_id: uuid!
+    user_id: uuid!
+    "An array relationship"
+    user_passed_questions(
+        "distinct select on columns"
+        distinct_on: [user_passed_questions_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_passed_questions_order_by!],
+        "filter the rows returned"
+        where: user_passed_questions_bool_exp
+    ): [user_passed_questions!]!
+    "An aggregate relationship"
+    user_passed_questions_aggregate(
+        "distinct select on columns"
+        distinct_on: [user_passed_questions_select_column!],
+        "limit the number of rows returned"
+        limit: Int,
+        "skip the first n rows. Use only with order_by"
+        offset: Int,
+        "sort the rows by one or more columns"
+        order_by: [user_passed_questions_order_by!],
+        "filter the rows returned"
+        where: user_passed_questions_bool_exp
+    ): user_passed_questions_aggregate!
+}
+
+"aggregated selection of \"user_passed_tests\""
+type user_passed_tests_aggregate {
+    aggregate: user_passed_tests_aggregate_fields
+    nodes: [user_passed_tests!]!
+}
+
+"aggregate fields of \"user_passed_tests\""
+type user_passed_tests_aggregate_fields {
+    count(columns: [user_passed_tests_select_column!], distinct: Boolean): Int!
+    max: user_passed_tests_max_fields
+    min: user_passed_tests_min_fields
+}
+
+"aggregate max on columns"
+type user_passed_tests_max_fields {
+    test_id: uuid
+    user_id: uuid
+}
+
+"aggregate min on columns"
+type user_passed_tests_min_fields {
+    test_id: uuid
+    user_id: uuid
+}
+
+"response of any mutation on the table \"user_passed_tests\""
+type user_passed_tests_mutation_response {
+    "number of rows affected by the mutation"
+    affected_rows: Int!
+    "data from the rows affected by the mutation"
+    returning: [user_passed_tests!]!
+}
+
+"Пользователи, которые проходят тесты"
+type user_testers {
+    created_at: timestamp!
+    id: uuid!
+    telegram_id: uuid!
+    updated_at: timestamp
+}
+
+"aggregated selection of \"user_testers\""
+type user_testers_aggregate {
+    aggregate: user_testers_aggregate_fields
+    nodes: [user_testers!]!
+}
+
+"aggregate fields of \"user_testers\""
+type user_testers_aggregate_fields {
+    count(columns: [user_testers_select_column!], distinct: Boolean): Int!
+    max: user_testers_max_fields
+    min: user_testers_min_fields
+}
+
+"aggregate max on columns"
+type user_testers_max_fields {
+    created_at: timestamp
+    id: uuid
+    telegram_id: uuid
+    updated_at: timestamp
+}
+
+"aggregate min on columns"
+type user_testers_min_fields {
+    created_at: timestamp
+    id: uuid
+    telegram_id: uuid
+    updated_at: timestamp
+}
+
+"response of any mutation on the table \"user_testers\""
+type user_testers_mutation_response {
+    "number of rows affected by the mutation"
+    affected_rows: Int!
+    "data from the rows affected by the mutation"
+    returning: [user_testers!]!
+}
+
+"unique or primary key constraints on table \"choice_answers\""
+enum choice_answers_constraint {
+    "unique or primary key constraint"
+    answers_pkey
+}
+
+"select columns of table \"choice_answers\""
+enum choice_answers_select_column {
+    "column name"
+    created_at
+    "column name"
+    id
+    "column name"
+    order
+    "column name"
+    question_id
+    "column name"
+    test_id
+    "column name"
+    text
+    "column name"
+    updated_at
+}
+
+"update columns of table \"choice_answers\""
+enum choice_answers_update_column {
+    "column name"
+    created_at
+    "column name"
+    id
+    "column name"
+    order
+    "column name"
+    question_id
+    "column name"
+    test_id
+    "column name"
+    text
+    "column name"
+    updated_at
+}
+
+"column ordering options"
+enum order_by {
+    "in ascending order, nulls last"
+    asc
+    "in ascending order, nulls first"
+    asc_nulls_first
+    "in ascending order, nulls last"
+    asc_nulls_last
+    "in descending order, nulls first"
+    desc
+    "in descending order, nulls first"
+    desc_nulls_first
+    "in descending order, nulls last"
+    desc_nulls_last
+}
+
+"unique or primary key constraints on table \"question_types\""
+enum question_types_constraint {
+    "unique or primary key constraint"
+    question_types_pkey
+}
+
+enum question_types_enum {
+    "Вопрос с выбором множества ответов"
+    CHOICE_MULTIPLE_ANSWER
+    "Вопрос с выбором одного ответа"
+    CHOICE_ONE_ANSWER
+    "Вопрос с ответом в свободной форме"
+    FREE_FORM
+}
+
+"select columns of table \"question_types\""
+enum question_types_select_column {
+    "column name"
+    description
+    "column name"
+    value
+}
+
+"update columns of table \"question_types\""
+enum question_types_update_column {
+    "column name"
+    description
+    "column name"
+    value
+}
+
+"unique or primary key constraints on table \"questions\""
+enum questions_constraint {
+    "unique or primary key constraint"
+    questions_pkey
+}
+
+"select columns of table \"questions\""
+enum questions_select_column {
+    "column name"
+    created_at
+    "column name"
+    id
+    "column name"
+    order
+    "column name"
+    question_type
+    "column name"
+    test_id
+    "column name"
+    text
+    "column name"
+    updated_at
+}
+
+"update columns of table \"questions\""
+enum questions_update_column {
+    "column name"
+    created_at
+    "column name"
+    id
+    "column name"
+    order
+    "column name"
+    question_type
+    "column name"
+    test_id
+    "column name"
+    text
+    "column name"
+    updated_at
+}
+
+"unique or primary key constraints on table \"table_for_lol_kek_testing_migration_dont_use_it_please\""
+enum table_for_lol_kek_testing_migration_dont_use_it_please_constraint {
+    "unique or primary key constraint"
+    table_for_lol_kek_testing_migration_dont_use_it_please_pkey
+}
+
+"select columns of table \"table_for_lol_kek_testing_migration_dont_use_it_please\""
+enum table_for_lol_kek_testing_migration_dont_use_it_please_select_column {
+    "column name"
+    id
+}
+
+"update columns of table \"table_for_lol_kek_testing_migration_dont_use_it_please\""
+enum table_for_lol_kek_testing_migration_dont_use_it_please_update_column {
+    "column name"
+    id
+}
+
+"unique or primary key constraints on table \"tests\""
+enum tests_constraint {
+    "unique or primary key constraint"
+    tests_pkey
+}
+
+"select columns of table \"tests\""
+enum tests_select_column {
+    "column name"
+    created_at
+    "column name"
+    description
+    "column name"
+    id
+    "column name"
+    name
+    "column name"
+    updated_at
+}
+
+"update columns of table \"tests\""
+enum tests_update_column {
+    "column name"
+    created_at
+    "column name"
+    description
+    "column name"
+    id
+    "column name"
+    name
+    "column name"
+    updated_at
+}
+
+"unique or primary key constraints on table \"user_choice_answers\""
+enum user_choice_answers_constraint {
+    "unique or primary key constraint"
+    user_choice_answers_pkey
+}
+
+"select columns of table \"user_choice_answers\""
+enum user_choice_answers_select_column {
+    "column name"
+    answer_id
+    "column name"
+    question_id
+    "column name"
+    test_id
+    "column name"
+    user_id
+}
+
+"update columns of table \"user_choice_answers\""
+enum user_choice_answers_update_column {
+    "column name"
+    answer_id
+    "column name"
+    question_id
+    "column name"
+    test_id
+    "column name"
+    user_id
+}
+
+"unique or primary key constraints on table \"user_free_form_answers\""
+enum user_free_form_answers_constraint {
+    "unique or primary key constraint"
+    user_free_form_answers_pkey
+}
+
+"select columns of table \"user_free_form_answers\""
+enum user_free_form_answers_select_column {
+    "column name"
+    question_id
+    "column name"
+    test_id
+    "column name"
+    text
+    "column name"
+    user_id
+}
+
+"update columns of table \"user_free_form_answers\""
+enum user_free_form_answers_update_column {
+    "column name"
+    question_id
+    "column name"
+    test_id
+    "column name"
+    text
+    "column name"
+    user_id
+}
+
+"unique or primary key constraints on table \"user_passed_questions\""
+enum user_passed_questions_constraint {
+    "unique or primary key constraint"
+    user_passed_questions_pkey
+}
+
+"select columns of table \"user_passed_questions\""
+enum user_passed_questions_select_column {
+    "column name"
+    answer_date
+    "column name"
+    question_id
+    "column name"
+    test_id
+    "column name"
+    user_id
+}
+
+"update columns of table \"user_passed_questions\""
+enum user_passed_questions_update_column {
+    "column name"
+    answer_date
+    "column name"
+    question_id
+    "column name"
+    test_id
+    "column name"
+    user_id
+}
+
+"unique or primary key constraints on table \"user_passed_tests\""
+enum user_passed_tests_constraint {
+    "unique or primary key constraint"
+    user_passed_tests_pkey
+}
+
+"select columns of table \"user_passed_tests\""
+enum user_passed_tests_select_column {
+    "column name"
+    end_date
+    "column name"
+    start_date
+    "column name"
+    test_id
+    "column name"
+    user_id
+}
+
+"update columns of table \"user_passed_tests\""
+enum user_passed_tests_update_column {
+    "column name"
+    end_date
+    "column name"
+    start_date
+    "column name"
+    test_id
+    "column name"
+    user_id
+}
+
+"unique or primary key constraints on table \"user_testers\""
+enum user_testers_constraint {
+    "unique or primary key constraint"
+    test_members_pkey
+    "unique or primary key constraint"
+    test_members_telegram_id_key
+}
+
+"select columns of table \"user_testers\""
+enum user_testers_select_column {
+    "column name"
+    created_at
+    "column name"
+    id
+    "column name"
+    telegram_id
+    "column name"
+    updated_at
+}
+
+"update columns of table \"user_testers\""
+enum user_testers_update_column {
+    "column name"
+    created_at
+    "column name"
+    id
+    "column name"
+    telegram_id
+    "column name"
+    updated_at
+}
+
+scalar time
+
+scalar timestamp
+
+scalar uuid
+
+"Boolean expression to compare columns of type \"Int\". All fields are combined with logical 'AND'."
+input Int_comparison_exp {
+    _eq: Int
+    _gt: Int
+    _gte: Int
+    _in: [Int!]
+    _is_null: Boolean
+    _lt: Int
+    _lte: Int
+    _neq: Int
+    _nin: [Int!]
+}
+
+"Boolean expression to compare columns of type \"String\". All fields are combined with logical 'AND'."
+input String_comparison_exp {
+    _eq: String
+    _gt: String
+    _gte: String
+    "does the column match the given case-insensitive pattern"
+    _ilike: String
+    _in: [String!]
+    "does the column match the given POSIX regular expression, case insensitive"
+    _iregex: String
+    _is_null: Boolean
+    "does the column match the given pattern"
+    _like: String
+    _lt: String
+    _lte: String
+    _neq: String
+    "does the column NOT match the given case-insensitive pattern"
+    _nilike: String
+    _nin: [String!]
+    "does the column NOT match the given POSIX regular expression, case insensitive"
+    _niregex: String
+    "does the column NOT match the given pattern"
+    _nlike: String
+    "does the column NOT match the given POSIX regular expression, case sensitive"
+    _nregex: String
+    "does the column NOT match the given SQL regular expression"
+    _nsimilar: String
+    "does the column match the given POSIX regular expression, case sensitive"
+    _regex: String
+    "does the column match the given SQL regular expression"
+    _similar: String
+}
+
+"order by aggregate values of table \"choice_answers\""
+input choice_answers_aggregate_order_by {
+    avg: choice_answers_avg_order_by
+    count: order_by
+    max: choice_answers_max_order_by
+    min: choice_answers_min_order_by
+    stddev: choice_answers_stddev_order_by
+    stddev_pop: choice_answers_stddev_pop_order_by
+    stddev_samp: choice_answers_stddev_samp_order_by
+    sum: choice_answers_sum_order_by
+    var_pop: choice_answers_var_pop_order_by
+    var_samp: choice_answers_var_samp_order_by
+    variance: choice_answers_variance_order_by
+}
+
+"input type for inserting array relation for remote table \"choice_answers\""
+input choice_answers_arr_rel_insert_input {
+    data: [choice_answers_insert_input!]!
+    "upsert condition"
+    on_conflict: choice_answers_on_conflict
+}
+
+"order by avg() on columns of table \"choice_answers\""
+input choice_answers_avg_order_by {
+    order: order_by
+}
+
+"Boolean expression to filter rows from the table \"choice_answers\". All fields are combined with a logical 'AND'."
+input choice_answers_bool_exp {
+    _and: [choice_answers_bool_exp!]
+    _not: choice_answers_bool_exp
+    _or: [choice_answers_bool_exp!]
+    created_at: timestamp_comparison_exp
+    id: uuid_comparison_exp
+    order: Int_comparison_exp
+    question: questions_bool_exp
+    question_id: uuid_comparison_exp
+    test_id: uuid_comparison_exp
+    text: String_comparison_exp
+    updated_at: timestamp_comparison_exp
+}
+
+"input type for incrementing numeric columns in table \"choice_answers\""
+input choice_answers_inc_input {
+    order: Int
+}
+
+"input type for inserting data into table \"choice_answers\""
+input choice_answers_insert_input {
+    created_at: timestamp
+    id: uuid
+    order: Int
+    question: questions_obj_rel_insert_input
+    question_id: uuid
+    test_id: uuid
+    "Текст варианта ответа, который будет показан пользователю"
+    text: String
+    updated_at: timestamp
+}
+
+"order by max() on columns of table \"choice_answers\""
+input choice_answers_max_order_by {
+    created_at: order_by
+    id: order_by
+    order: order_by
+    question_id: order_by
+    test_id: order_by
+    "Текст варианта ответа, который будет показан пользователю"
+    text: order_by
+    updated_at: order_by
+}
+
+"order by min() on columns of table \"choice_answers\""
+input choice_answers_min_order_by {
+    created_at: order_by
+    id: order_by
+    order: order_by
+    question_id: order_by
+    test_id: order_by
+    "Текст варианта ответа, который будет показан пользователю"
+    text: order_by
+    updated_at: order_by
+}
+
+"input type for inserting object relation for remote table \"choice_answers\""
+input choice_answers_obj_rel_insert_input {
+    data: choice_answers_insert_input!
+    "upsert condition"
+    on_conflict: choice_answers_on_conflict
+}
+
+"on_conflict condition type for table \"choice_answers\""
+input choice_answers_on_conflict {
+    constraint: choice_answers_constraint!
+    update_columns: [choice_answers_update_column!]! = []
+    where: choice_answers_bool_exp
+}
+
+"Ordering options when selecting data from \"choice_answers\"."
+input choice_answers_order_by {
+    created_at: order_by
+    id: order_by
+    order: order_by
+    question: questions_order_by
+    question_id: order_by
+    test_id: order_by
+    text: order_by
+    updated_at: order_by
+}
+
+"primary key columns input for table: choice_answers"
+input choice_answers_pk_columns_input {
+    id: uuid!
+    question_id: uuid!
+    test_id: uuid!
+}
+
+"input type for updating data in table \"choice_answers\""
+input choice_answers_set_input {
+    created_at: timestamp
+    id: uuid
+    order: Int
+    question_id: uuid
+    test_id: uuid
+    "Текст варианта ответа, который будет показан пользователю"
+    text: String
+    updated_at: timestamp
+}
+
+"order by stddev() on columns of table \"choice_answers\""
+input choice_answers_stddev_order_by {
+    order: order_by
+}
+
+"order by stddev_pop() on columns of table \"choice_answers\""
+input choice_answers_stddev_pop_order_by {
+    order: order_by
+}
+
+"order by stddev_samp() on columns of table \"choice_answers\""
+input choice_answers_stddev_samp_order_by {
+    order: order_by
+}
+
+"order by sum() on columns of table \"choice_answers\""
+input choice_answers_sum_order_by {
+    order: order_by
+}
+
+"order by var_pop() on columns of table \"choice_answers\""
+input choice_answers_var_pop_order_by {
+    order: order_by
+}
+
+"order by var_samp() on columns of table \"choice_answers\""
+input choice_answers_var_samp_order_by {
+    order: order_by
+}
+
+"order by variance() on columns of table \"choice_answers\""
+input choice_answers_variance_order_by {
+    order: order_by
+}
+
+"Boolean expression to filter rows from the table \"question_types\". All fields are combined with a logical 'AND'."
+input question_types_bool_exp {
+    _and: [question_types_bool_exp!]
+    _not: question_types_bool_exp
+    _or: [question_types_bool_exp!]
+    description: String_comparison_exp
+    value: String_comparison_exp
+}
+
+"Boolean expression to compare columns of type \"question_types_enum\". All fields are combined with logical 'AND'."
+input question_types_enum_comparison_exp {
+    _eq: question_types_enum
+    _in: [question_types_enum!]
+    _is_null: Boolean
+    _neq: question_types_enum
+    _nin: [question_types_enum!]
+}
+
+"input type for inserting data into table \"question_types\""
+input question_types_insert_input {
+    description: String
+    value: String
+}
+
+"on_conflict condition type for table \"question_types\""
+input question_types_on_conflict {
+    constraint: question_types_constraint!
+    update_columns: [question_types_update_column!]! = []
+    where: question_types_bool_exp
+}
+
+"Ordering options when selecting data from \"question_types\"."
+input question_types_order_by {
+    description: order_by
+    value: order_by
+}
+
+"primary key columns input for table: question_types"
+input question_types_pk_columns_input {
+    value: String!
+}
+
+"input type for updating data in table \"question_types\""
+input question_types_set_input {
+    description: String
+    value: String
+}
+
+"order by aggregate values of table \"questions\""
+input questions_aggregate_order_by {
+    avg: questions_avg_order_by
+    count: order_by
+    max: questions_max_order_by
+    min: questions_min_order_by
+    stddev: questions_stddev_order_by
+    stddev_pop: questions_stddev_pop_order_by
+    stddev_samp: questions_stddev_samp_order_by
+    sum: questions_sum_order_by
+    var_pop: questions_var_pop_order_by
+    var_samp: questions_var_samp_order_by
+    variance: questions_variance_order_by
+}
+
+"input type for inserting array relation for remote table \"questions\""
+input questions_arr_rel_insert_input {
+    data: [questions_insert_input!]!
+    "upsert condition"
+    on_conflict: questions_on_conflict
+}
+
+"order by avg() on columns of table \"questions\""
+input questions_avg_order_by {
+    "Порядковый номер вопроса в тесте"
+    order: order_by
+}
+
+"Boolean expression to filter rows from the table \"questions\". All fields are combined with a logical 'AND'."
+input questions_bool_exp {
+    _and: [questions_bool_exp!]
+    _not: questions_bool_exp
+    _or: [questions_bool_exp!]
+    choice_answers: choice_answers_bool_exp
+    created_at: timestamp_comparison_exp
+    id: uuid_comparison_exp
+    order: Int_comparison_exp
+    question_type: question_types_enum_comparison_exp
+    test: tests_bool_exp
+    test_id: uuid_comparison_exp
+    text: String_comparison_exp
+    updated_at: timestamp_comparison_exp
+}
+
+"input type for incrementing numeric columns in table \"questions\""
+input questions_inc_input {
+    "Порядковый номер вопроса в тесте"
+    order: Int
+}
+
+"input type for inserting data into table \"questions\""
+input questions_insert_input {
+    choice_answers: choice_answers_arr_rel_insert_input
+    created_at: timestamp
+    id: uuid
+    "Порядковый номер вопроса в тесте"
+    order: Int
+    "Тип вопроса (выбор одного варианта ответа, свободная форма и т.п.)"
+    question_type: question_types_enum
+    test: tests_obj_rel_insert_input
+    test_id: uuid
+    "Текст вопроса, который будет показан пользователю во время прохождения теста"
+    text: String
+    updated_at: timestamp
+}
+
+"order by max() on columns of table \"questions\""
+input questions_max_order_by {
+    created_at: order_by
+    id: order_by
+    "Порядковый номер вопроса в тесте"
+    order: order_by
+    test_id: order_by
+    "Текст вопроса, который будет показан пользователю во время прохождения теста"
+    text: order_by
+    updated_at: order_by
+}
+
+"order by min() on columns of table \"questions\""
+input questions_min_order_by {
+    created_at: order_by
+    id: order_by
+    "Порядковый номер вопроса в тесте"
+    order: order_by
+    test_id: order_by
+    "Текст вопроса, который будет показан пользователю во время прохождения теста"
+    text: order_by
+    updated_at: order_by
+}
+
+"input type for inserting object relation for remote table \"questions\""
+input questions_obj_rel_insert_input {
+    data: questions_insert_input!
+    "upsert condition"
+    on_conflict: questions_on_conflict
+}
+
+"on_conflict condition type for table \"questions\""
+input questions_on_conflict {
+    constraint: questions_constraint!
+    update_columns: [questions_update_column!]! = []
+    where: questions_bool_exp
+}
+
+"Ordering options when selecting data from \"questions\"."
+input questions_order_by {
+    choice_answers_aggregate: choice_answers_aggregate_order_by
+    created_at: order_by
+    id: order_by
+    order: order_by
+    question_type: order_by
+    test: tests_order_by
+    test_id: order_by
+    text: order_by
+    updated_at: order_by
+}
+
+"primary key columns input for table: questions"
+input questions_pk_columns_input {
+    id: uuid!
+    test_id: uuid!
+}
+
+"input type for updating data in table \"questions\""
+input questions_set_input {
+    created_at: timestamp
+    id: uuid
+    "Порядковый номер вопроса в тесте"
+    order: Int
+    "Тип вопроса (выбор одного варианта ответа, свободная форма и т.п.)"
+    question_type: question_types_enum
+    test_id: uuid
+    "Текст вопроса, который будет показан пользователю во время прохождения теста"
+    text: String
+    updated_at: timestamp
+}
+
+"order by stddev() on columns of table \"questions\""
+input questions_stddev_order_by {
+    "Порядковый номер вопроса в тесте"
+    order: order_by
+}
+
+"order by stddev_pop() on columns of table \"questions\""
+input questions_stddev_pop_order_by {
+    "Порядковый номер вопроса в тесте"
+    order: order_by
+}
+
+"order by stddev_samp() on columns of table \"questions\""
+input questions_stddev_samp_order_by {
+    "Порядковый номер вопроса в тесте"
+    order: order_by
+}
+
+"order by sum() on columns of table \"questions\""
+input questions_sum_order_by {
+    "Порядковый номер вопроса в тесте"
+    order: order_by
+}
+
+"order by var_pop() on columns of table \"questions\""
+input questions_var_pop_order_by {
+    "Порядковый номер вопроса в тесте"
+    order: order_by
+}
+
+"order by var_samp() on columns of table \"questions\""
+input questions_var_samp_order_by {
+    "Порядковый номер вопроса в тесте"
+    order: order_by
+}
+
+"order by variance() on columns of table \"questions\""
+input questions_variance_order_by {
+    "Порядковый номер вопроса в тесте"
+    order: order_by
+}
+
+"Boolean expression to filter rows from the table \"table_for_lol_kek_testing_migration_dont_use_it_please\". All fields are combined with a logical 'AND'."
+input table_for_lol_kek_testing_migration_dont_use_it_please_bool_exp {
+    _and: [table_for_lol_kek_testing_migration_dont_use_it_please_bool_exp!]
+    _not: table_for_lol_kek_testing_migration_dont_use_it_please_bool_exp
+    _or: [table_for_lol_kek_testing_migration_dont_use_it_please_bool_exp!]
+    id: uuid_comparison_exp
+}
+
+"input type for inserting data into table \"table_for_lol_kek_testing_migration_dont_use_it_please\""
+input table_for_lol_kek_testing_migration_dont_use_it_please_insert_input {
+    id: uuid
+}
+
+"on_conflict condition type for table \"table_for_lol_kek_testing_migration_dont_use_it_please\""
+input table_for_lol_kek_testing_migration_dont_use_it_please_on_conflict {
+    constraint: table_for_lol_kek_testing_migration_dont_use_it_please_constraint!
+    update_columns: [table_for_lol_kek_testing_migration_dont_use_it_please_update_column!]! = []
+    where: table_for_lol_kek_testing_migration_dont_use_it_please_bool_exp
+}
+
+"Ordering options when selecting data from \"table_for_lol_kek_testing_migration_dont_use_it_please\"."
+input table_for_lol_kek_testing_migration_dont_use_it_please_order_by {
+    id: order_by
+}
+
+"primary key columns input for table: table_for_lol_kek_testing_migration_dont_use_it_please"
+input table_for_lol_kek_testing_migration_dont_use_it_please_pk_columns_input {
+    id: uuid!
+}
+
+"input type for updating data in table \"table_for_lol_kek_testing_migration_dont_use_it_please\""
+input table_for_lol_kek_testing_migration_dont_use_it_please_set_input {
+    id: uuid
+}
+
+"Boolean expression to filter rows from the table \"tests\". All fields are combined with a logical 'AND'."
+input tests_bool_exp {
+    _and: [tests_bool_exp!]
+    _not: tests_bool_exp
+    _or: [tests_bool_exp!]
+    created_at: timestamp_comparison_exp
+    description: String_comparison_exp
+    id: uuid_comparison_exp
+    name: String_comparison_exp
+    questions: questions_bool_exp
+    updated_at: timestamp_comparison_exp
+    user_passed_tests: user_passed_tests_bool_exp
+}
+
+"input type for inserting data into table \"tests\""
+input tests_insert_input {
+    created_at: timestamp
+    description: String
+    id: uuid
+    name: String
+    questions: questions_arr_rel_insert_input
+    updated_at: timestamp
+    user_passed_tests: user_passed_tests_arr_rel_insert_input
+}
+
+"input type for inserting object relation for remote table \"tests\""
+input tests_obj_rel_insert_input {
+    data: tests_insert_input!
+    "upsert condition"
+    on_conflict: tests_on_conflict
+}
+
+"on_conflict condition type for table \"tests\""
+input tests_on_conflict {
+    constraint: tests_constraint!
+    update_columns: [tests_update_column!]! = []
+    where: tests_bool_exp
+}
+
+"Ordering options when selecting data from \"tests\"."
+input tests_order_by {
+    created_at: order_by
+    description: order_by
+    id: order_by
+    name: order_by
+    questions_aggregate: questions_aggregate_order_by
+    updated_at: order_by
+    user_passed_tests_aggregate: user_passed_tests_aggregate_order_by
+}
+
+"primary key columns input for table: tests"
+input tests_pk_columns_input {
+    id: uuid!
+}
+
+"input type for updating data in table \"tests\""
+input tests_set_input {
+    created_at: timestamp
+    description: String
+    id: uuid
+    name: String
+    updated_at: timestamp
+}
+
+"Boolean expression to compare columns of type \"time\". All fields are combined with logical 'AND'."
+input time_comparison_exp {
+    _eq: time
+    _gt: time
+    _gte: time
+    _in: [time!]
+    _is_null: Boolean
+    _lt: time
+    _lte: time
+    _neq: time
+    _nin: [time!]
+}
+
+"Boolean expression to compare columns of type \"timestamp\". All fields are combined with logical 'AND'."
+input timestamp_comparison_exp {
+    _eq: timestamp
+    _gt: timestamp
+    _gte: timestamp
+    _in: [timestamp!]
+    _is_null: Boolean
+    _lt: timestamp
+    _lte: timestamp
+    _neq: timestamp
+    _nin: [timestamp!]
+}
+
+"order by aggregate values of table \"user_choice_answers\""
+input user_choice_answers_aggregate_order_by {
+    count: order_by
+    max: user_choice_answers_max_order_by
+    min: user_choice_answers_min_order_by
+}
+
+"input type for inserting array relation for remote table \"user_choice_answers\""
+input user_choice_answers_arr_rel_insert_input {
+    data: [user_choice_answers_insert_input!]!
+    "upsert condition"
+    on_conflict: user_choice_answers_on_conflict
+}
+
+"Boolean expression to filter rows from the table \"user_choice_answers\". All fields are combined with a logical 'AND'."
+input user_choice_answers_bool_exp {
+    _and: [user_choice_answers_bool_exp!]
+    _not: user_choice_answers_bool_exp
+    _or: [user_choice_answers_bool_exp!]
+    answer: choice_answers_bool_exp
+    answer_id: uuid_comparison_exp
+    question_id: uuid_comparison_exp
+    test_id: uuid_comparison_exp
+    user_id: uuid_comparison_exp
+}
+
+"input type for inserting data into table \"user_choice_answers\""
+input user_choice_answers_insert_input {
+    answer: choice_answers_obj_rel_insert_input
+    "Ссылка на выбранный ответ, который есть в вопросе"
+    answer_id: uuid
+    question_id: uuid
+    test_id: uuid
+    user_id: uuid
+}
+
+"order by max() on columns of table \"user_choice_answers\""
+input user_choice_answers_max_order_by {
+    "Ссылка на выбранный ответ, который есть в вопросе"
+    answer_id: order_by
+    question_id: order_by
+    test_id: order_by
+    user_id: order_by
+}
+
+"order by min() on columns of table \"user_choice_answers\""
+input user_choice_answers_min_order_by {
+    "Ссылка на выбранный ответ, который есть в вопросе"
+    answer_id: order_by
+    question_id: order_by
+    test_id: order_by
+    user_id: order_by
+}
+
+"on_conflict condition type for table \"user_choice_answers\""
+input user_choice_answers_on_conflict {
+    constraint: user_choice_answers_constraint!
+    update_columns: [user_choice_answers_update_column!]! = []
+    where: user_choice_answers_bool_exp
+}
+
+"Ordering options when selecting data from \"user_choice_answers\"."
+input user_choice_answers_order_by {
+    answer: choice_answers_order_by
+    answer_id: order_by
+    question_id: order_by
+    test_id: order_by
+    user_id: order_by
+}
+
+"primary key columns input for table: user_choice_answers"
+input user_choice_answers_pk_columns_input {
+    "Ссылка на выбранный ответ, который есть в вопросе"
+    answer_id: uuid!
+    question_id: uuid!
+    test_id: uuid!
+}
+
+"input type for updating data in table \"user_choice_answers\""
+input user_choice_answers_set_input {
+    "Ссылка на выбранный ответ, который есть в вопросе"
+    answer_id: uuid
+    question_id: uuid
+    test_id: uuid
+    user_id: uuid
+}
+
+"Boolean expression to filter rows from the table \"user_free_form_answers\". All fields are combined with a logical 'AND'."
+input user_free_form_answers_bool_exp {
+    _and: [user_free_form_answers_bool_exp!]
+    _not: user_free_form_answers_bool_exp
+    _or: [user_free_form_answers_bool_exp!]
+    question_id: uuid_comparison_exp
+    test_id: uuid_comparison_exp
+    text: String_comparison_exp
+    user_id: uuid_comparison_exp
+    user_passed_question: user_passed_questions_bool_exp
+}
+
+"input type for inserting data into table \"user_free_form_answers\""
+input user_free_form_answers_insert_input {
+    question_id: uuid
+    test_id: uuid
+    "Текст ответа, данного в свободной форме"
+    text: String
+    user_id: uuid
+    user_passed_question: user_passed_questions_obj_rel_insert_input
+}
+
+"input type for inserting object relation for remote table \"user_free_form_answers\""
+input user_free_form_answers_obj_rel_insert_input {
+    data: user_free_form_answers_insert_input!
+    "upsert condition"
+    on_conflict: user_free_form_answers_on_conflict
+}
+
+"on_conflict condition type for table \"user_free_form_answers\""
+input user_free_form_answers_on_conflict {
+    constraint: user_free_form_answers_constraint!
+    update_columns: [user_free_form_answers_update_column!]! = []
+    where: user_free_form_answers_bool_exp
+}
+
+"Ordering options when selecting data from \"user_free_form_answers\"."
+input user_free_form_answers_order_by {
+    question_id: order_by
+    test_id: order_by
+    text: order_by
+    user_id: order_by
+    user_passed_question: user_passed_questions_order_by
+}
+
+"primary key columns input for table: user_free_form_answers"
+input user_free_form_answers_pk_columns_input {
+    question_id: uuid!
+    test_id: uuid!
+    user_id: uuid!
+}
+
+"input type for updating data in table \"user_free_form_answers\""
+input user_free_form_answers_set_input {
+    question_id: uuid
+    test_id: uuid
+    "Текст ответа, данного в свободной форме"
+    text: String
+    user_id: uuid
+}
+
+"order by aggregate values of table \"user_passed_questions\""
+input user_passed_questions_aggregate_order_by {
+    count: order_by
+    max: user_passed_questions_max_order_by
+    min: user_passed_questions_min_order_by
+}
+
+"input type for inserting array relation for remote table \"user_passed_questions\""
+input user_passed_questions_arr_rel_insert_input {
+    data: [user_passed_questions_insert_input!]!
+    "upsert condition"
+    on_conflict: user_passed_questions_on_conflict
+}
+
+"Boolean expression to filter rows from the table \"user_passed_questions\". All fields are combined with a logical 'AND'."
+input user_passed_questions_bool_exp {
+    _and: [user_passed_questions_bool_exp!]
+    _not: user_passed_questions_bool_exp
+    _or: [user_passed_questions_bool_exp!]
+    answer_date: timestamp_comparison_exp
+    question: questions_bool_exp
+    question_id: uuid_comparison_exp
+    test_id: uuid_comparison_exp
+    user_choice_answers: user_choice_answers_bool_exp
+    user_free_form_answer: user_free_form_answers_bool_exp
+    user_id: uuid_comparison_exp
+}
+
+"input type for inserting data into table \"user_passed_questions\""
+input user_passed_questions_insert_input {
+    answer_date: timestamp
+    question: questions_obj_rel_insert_input
+    question_id: uuid
+    test_id: uuid
+    user_choice_answers: user_choice_answers_arr_rel_insert_input
+    user_free_form_answer: user_free_form_answers_obj_rel_insert_input
+    user_id: uuid
+}
+
+"order by max() on columns of table \"user_passed_questions\""
+input user_passed_questions_max_order_by {
+    answer_date: order_by
+    question_id: order_by
+    test_id: order_by
+    user_id: order_by
+}
+
+"order by min() on columns of table \"user_passed_questions\""
+input user_passed_questions_min_order_by {
+    answer_date: order_by
+    question_id: order_by
+    test_id: order_by
+    user_id: order_by
+}
+
+"input type for inserting object relation for remote table \"user_passed_questions\""
+input user_passed_questions_obj_rel_insert_input {
+    data: user_passed_questions_insert_input!
+    "upsert condition"
+    on_conflict: user_passed_questions_on_conflict
+}
+
+"on_conflict condition type for table \"user_passed_questions\""
+input user_passed_questions_on_conflict {
+    constraint: user_passed_questions_constraint!
+    update_columns: [user_passed_questions_update_column!]! = []
+    where: user_passed_questions_bool_exp
+}
+
+"Ordering options when selecting data from \"user_passed_questions\"."
+input user_passed_questions_order_by {
+    answer_date: order_by
+    question: questions_order_by
+    question_id: order_by
+    test_id: order_by
+    user_choice_answers_aggregate: user_choice_answers_aggregate_order_by
+    user_free_form_answer: user_free_form_answers_order_by
+    user_id: order_by
+}
+
+"primary key columns input for table: user_passed_questions"
+input user_passed_questions_pk_columns_input {
+    question_id: uuid!
+    test_id: uuid!
+    user_id: uuid!
+}
+
+"input type for updating data in table \"user_passed_questions\""
+input user_passed_questions_set_input {
+    answer_date: timestamp
+    question_id: uuid
+    test_id: uuid
+    user_id: uuid
+}
+
+"order by aggregate values of table \"user_passed_tests\""
+input user_passed_tests_aggregate_order_by {
+    count: order_by
+    max: user_passed_tests_max_order_by
+    min: user_passed_tests_min_order_by
+}
+
+"input type for inserting array relation for remote table \"user_passed_tests\""
+input user_passed_tests_arr_rel_insert_input {
+    data: [user_passed_tests_insert_input!]!
+    "upsert condition"
+    on_conflict: user_passed_tests_on_conflict
+}
+
+"Boolean expression to filter rows from the table \"user_passed_tests\". All fields are combined with a logical 'AND'."
+input user_passed_tests_bool_exp {
+    _and: [user_passed_tests_bool_exp!]
+    _not: user_passed_tests_bool_exp
+    _or: [user_passed_tests_bool_exp!]
+    end_date: time_comparison_exp
+    start_date: time_comparison_exp
+    test: tests_bool_exp
+    test_id: uuid_comparison_exp
+    user_id: uuid_comparison_exp
+    user_passed_questions: user_passed_questions_bool_exp
+}
+
+"input type for inserting data into table \"user_passed_tests\""
+input user_passed_tests_insert_input {
+    end_date: time
+    start_date: time
+    test: tests_obj_rel_insert_input
+    test_id: uuid
+    user_id: uuid
+    user_passed_questions: user_passed_questions_arr_rel_insert_input
+}
+
+"order by max() on columns of table \"user_passed_tests\""
+input user_passed_tests_max_order_by {
+    test_id: order_by
+    user_id: order_by
+}
+
+"order by min() on columns of table \"user_passed_tests\""
+input user_passed_tests_min_order_by {
+    test_id: order_by
+    user_id: order_by
+}
+
+"on_conflict condition type for table \"user_passed_tests\""
+input user_passed_tests_on_conflict {
+    constraint: user_passed_tests_constraint!
+    update_columns: [user_passed_tests_update_column!]! = []
+    where: user_passed_tests_bool_exp
+}
+
+"Ordering options when selecting data from \"user_passed_tests\"."
+input user_passed_tests_order_by {
+    end_date: order_by
+    start_date: order_by
+    test: tests_order_by
+    test_id: order_by
+    user_id: order_by
+    user_passed_questions_aggregate: user_passed_questions_aggregate_order_by
+}
+
+"primary key columns input for table: user_passed_tests"
+input user_passed_tests_pk_columns_input {
+    test_id: uuid!
+    user_id: uuid!
+}
+
+"input type for updating data in table \"user_passed_tests\""
+input user_passed_tests_set_input {
+    end_date: time
+    start_date: time
+    test_id: uuid
+    user_id: uuid
+}
+
+"Boolean expression to filter rows from the table \"user_testers\". All fields are combined with a logical 'AND'."
+input user_testers_bool_exp {
+    _and: [user_testers_bool_exp!]
+    _not: user_testers_bool_exp
+    _or: [user_testers_bool_exp!]
+    created_at: timestamp_comparison_exp
+    id: uuid_comparison_exp
+    telegram_id: uuid_comparison_exp
+    updated_at: timestamp_comparison_exp
+}
+
+"input type for inserting data into table \"user_testers\""
+input user_testers_insert_input {
+    created_at: timestamp
+    id: uuid
+    telegram_id: uuid
+    updated_at: timestamp
+}
+
+"on_conflict condition type for table \"user_testers\""
+input user_testers_on_conflict {
+    constraint: user_testers_constraint!
+    update_columns: [user_testers_update_column!]! = []
+    where: user_testers_bool_exp
+}
+
+"Ordering options when selecting data from \"user_testers\"."
+input user_testers_order_by {
+    created_at: order_by
+    id: order_by
+    telegram_id: order_by
+    updated_at: order_by
+}
+
+"primary key columns input for table: user_testers"
+input user_testers_pk_columns_input {
+    id: uuid!
+}
+
+"input type for updating data in table \"user_testers\""
+input user_testers_set_input {
+    created_at: timestamp
+    id: uuid
+    telegram_id: uuid
+    updated_at: timestamp
+}
+
+"Boolean expression to compare columns of type \"uuid\". All fields are combined with logical 'AND'."
+input uuid_comparison_exp {
+    _eq: uuid
+    _gt: uuid
+    _gte: uuid
+    _in: [uuid!]
+    _is_null: Boolean
+    _lt: uuid
+    _lte: uuid
+    _neq: uuid
+    _nin: [uuid!]
+}

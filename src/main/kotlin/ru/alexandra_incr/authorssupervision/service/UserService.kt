@@ -1,8 +1,12 @@
 package ru.alexandra_incr.authorssupervision.service
 
+import org.jooq.Condition
 import org.jooq.DSLContext
+import org.jooq.Record
 import org.jooq.generated.tables.AccessRights
 import org.jooq.generated.tables.AccessRightsUsers.ACCESS_RIGHTS_USERS
+import org.jooq.generated.tables.HistoryPassword.HISTORY_PASSWORD
+import org.jooq.generated.tables.UserSystem
 import org.jooq.generated.tables.UserSystem.USER_SYSTEM
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -21,14 +25,24 @@ class UserService(
     private val bCryptPasswordEncoder: BCryptPasswordEncoder,
     private val rolesService: RolesService,
 ) {
-
+    val findUser: (Condition) -> Record =  USER_SYSTEM.findByOne(dslContext)
     var logger: Logger = LoggerFactory.getLogger(UserService::class.java)
 
-    fun changePassword(id:Long,newPassword:String){
-        dslContext.update(USER_SYSTEM)
-            .set(USER_SYSTEM.PASSWORD,bCryptPasswordEncoder.encode(newPassword))
-            .set(USER_SYSTEM.DATE_CHANGE_PASSWORD, LocalDate.now())
-            .where(USER_SYSTEM.ID.eq(id)).execute()
+    fun changePassword(id: Long, password: String, newPassword: String) {
+        if (password != newPassword) {
+            val user = findUser(USER_SYSTEM.ID.eq(id))
+            if (bCryptPasswordEncoder.matches(password, user[USER_SYSTEM.PASSWORD])) {
+                dslContext.insertInto(HISTORY_PASSWORD)
+                    .set(HISTORY_PASSWORD.PASSWORD, password)
+                    .set(HISTORY_PASSWORD.USER_ID, user[USER_SYSTEM.ID])
+                    .set(HISTORY_PASSWORD.DATE, LocalDate.now())
+                    .execute()
+                dslContext.update(USER_SYSTEM)
+                    .set(USER_SYSTEM.PASSWORD, bCryptPasswordEncoder.encode(newPassword))
+                    .set(USER_SYSTEM.DATE_CHANGE_PASSWORD, LocalDate.now())
+                    .where(USER_SYSTEM.ID.eq(id)).execute()
+            }
+        }
     }
 
     fun getUserByLoginAndPassword(login: String, password: String): UserDetails = dslContext
@@ -70,4 +84,12 @@ class UserService(
         dslContext.batch(listInsert).execute()
         logger.info("Пользователь $login зарегистрировался")
     }
+}
+
+
+fun UserSystem.findByOne(dslContext: DSLContext): (Condition) -> Record = { predict ->
+    dslContext.select()
+        .from(this)
+        .where(predict)
+        .fetch().singleOrNull() ?: throw Exception("Запрос вернул больше одного пользователя")
 }

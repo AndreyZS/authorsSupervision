@@ -29,6 +29,7 @@ class WebSecurityConfig(
             .antMatchers("/auth/registration").permitAll()
             .antMatchers("/role/list").permitAll()
             .antMatchers("/auth/admin").hasRole(Roles.ADMIN.name)
+            .antMatchers("/admin/**").hasRole(Roles.ADMIN.name)
             .anyRequest().authenticated()
         http.addFilterBefore(authService, UsernamePasswordAuthenticationFilter::class.java)
     }

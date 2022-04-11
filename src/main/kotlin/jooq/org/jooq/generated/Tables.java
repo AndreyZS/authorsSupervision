@@ -7,6 +7,7 @@ package org.jooq.generated;
 import org.jooq.generated.tables.AccessRights;
 import org.jooq.generated.tables.AccessRightsUsers;
 import org.jooq.generated.tables.FlywaySchemaHistory;
+import org.jooq.generated.tables.HistoryPassword;
 import org.jooq.generated.tables.UserSystem;
 
 
@@ -30,6 +31,11 @@ public class Tables {
      * The table <code>flyway_schema_history</code>.
      */
     public static final FlywaySchemaHistory FLYWAY_SCHEMA_HISTORY = FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY;
+
+    /**
+     * The table <code>history_password</code>.
+     */
+    public static final HistoryPassword HISTORY_PASSWORD = HistoryPassword.HISTORY_PASSWORD;
 
     /**
      * The table <code>user_system</code>.

@@ -6,7 +6,7 @@ import java.time.LocalDate
 
 sealed interface UserSystem
 
-class AuthorizedUser(val id: Long, val login: String, val listRoles: List<GrantedAuthority>,val dateChangePassword:LocalDate) :
+class AuthorizedUser(val id: Long, val login: String, val listRoles: List<GrantedAuthority>,val dateChangePassword:LocalDate?) :
     UserSystem, UserDetails {
     override fun getAuthorities(): Collection<GrantedAuthority> {
         return listRoles

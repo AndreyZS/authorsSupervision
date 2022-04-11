@@ -12,6 +12,7 @@ import org.jooq.Table;
 import org.jooq.generated.tables.AccessRights;
 import org.jooq.generated.tables.AccessRightsUsers;
 import org.jooq.generated.tables.FlywaySchemaHistory;
+import org.jooq.generated.tables.HistoryPassword;
 import org.jooq.generated.tables.UserSystem;
 import org.jooq.impl.SchemaImpl;
 
@@ -45,6 +46,11 @@ public class DefaultSchema extends SchemaImpl {
     public final FlywaySchemaHistory FLYWAY_SCHEMA_HISTORY = FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY;
 
     /**
+     * The table <code>history_password</code>.
+     */
+    public final HistoryPassword HISTORY_PASSWORD = HistoryPassword.HISTORY_PASSWORD;
+
+    /**
      * The table <code>user_system</code>.
      */
     public final UserSystem USER_SYSTEM = UserSystem.USER_SYSTEM;
@@ -68,6 +74,7 @@ public class DefaultSchema extends SchemaImpl {
             AccessRights.ACCESS_RIGHTS,
             AccessRightsUsers.ACCESS_RIGHTS_USERS,
             FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY,
+            HistoryPassword.HISTORY_PASSWORD,
             UserSystem.USER_SYSTEM
         );
     }

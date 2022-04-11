@@ -22,9 +22,9 @@ class AccountController(
         summary = "Смена пароля",
         tags = ["account"]
     )
-    fun changePassword(@RequestParam("new-password") password:String){
+    fun changePassword(@RequestParam("password") password:String,@RequestParam("newPassword") newPassword:String){
         val id = securityUtils.getID()
         if(id != null)
-            userService.changePassword(id,password)
+            userService.changePassword(id,password,newPassword)
     }
 }
