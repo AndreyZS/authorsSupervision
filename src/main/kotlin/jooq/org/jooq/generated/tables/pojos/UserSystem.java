@@ -20,24 +20,36 @@ public class UserSystem implements Serializable {
     private final String    login;
     private final String    password;
     private final LocalDate dateChangePassword;
+    private final LocalDate dateRegistration;
+    private final LocalDate onlineDate;
+    private final Boolean   locked;
 
     public UserSystem(UserSystem value) {
         this.id = value.id;
         this.login = value.login;
         this.password = value.password;
         this.dateChangePassword = value.dateChangePassword;
+        this.dateRegistration = value.dateRegistration;
+        this.onlineDate = value.onlineDate;
+        this.locked = value.locked;
     }
 
     public UserSystem(
         Long      id,
         String    login,
         String    password,
-        LocalDate dateChangePassword
+        LocalDate dateChangePassword,
+        LocalDate dateRegistration,
+        LocalDate onlineDate,
+        Boolean   locked
     ) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.dateChangePassword = dateChangePassword;
+        this.dateRegistration = dateRegistration;
+        this.onlineDate = onlineDate;
+        this.locked = locked;
     }
 
     /**
@@ -66,6 +78,27 @@ public class UserSystem implements Serializable {
      */
     public LocalDate getDateChangePassword() {
         return this.dateChangePassword;
+    }
+
+    /**
+     * Getter for <code>user_system.date_registration</code>.
+     */
+    public LocalDate getDateRegistration() {
+        return this.dateRegistration;
+    }
+
+    /**
+     * Getter for <code>user_system.online_date</code>.
+     */
+    public LocalDate getOnlineDate() {
+        return this.onlineDate;
+    }
+
+    /**
+     * Getter for <code>user_system.locked</code>.
+     */
+    public Boolean getLocked() {
+        return this.locked;
     }
 
     @Override
@@ -101,6 +134,24 @@ public class UserSystem implements Serializable {
         }
         else if (!dateChangePassword.equals(other.dateChangePassword))
             return false;
+        if (dateRegistration == null) {
+            if (other.dateRegistration != null)
+                return false;
+        }
+        else if (!dateRegistration.equals(other.dateRegistration))
+            return false;
+        if (onlineDate == null) {
+            if (other.onlineDate != null)
+                return false;
+        }
+        else if (!onlineDate.equals(other.onlineDate))
+            return false;
+        if (locked == null) {
+            if (other.locked != null)
+                return false;
+        }
+        else if (!locked.equals(other.locked))
+            return false;
         return true;
     }
 
@@ -112,6 +163,9 @@ public class UserSystem implements Serializable {
         result = prime * result + ((this.login == null) ? 0 : this.login.hashCode());
         result = prime * result + ((this.password == null) ? 0 : this.password.hashCode());
         result = prime * result + ((this.dateChangePassword == null) ? 0 : this.dateChangePassword.hashCode());
+        result = prime * result + ((this.dateRegistration == null) ? 0 : this.dateRegistration.hashCode());
+        result = prime * result + ((this.onlineDate == null) ? 0 : this.onlineDate.hashCode());
+        result = prime * result + ((this.locked == null) ? 0 : this.locked.hashCode());
         return result;
     }
 
@@ -123,6 +177,9 @@ public class UserSystem implements Serializable {
         sb.append(", ").append(login);
         sb.append(", ").append(password);
         sb.append(", ").append(dateChangePassword);
+        sb.append(", ").append(dateRegistration);
+        sb.append(", ").append(onlineDate);
+        sb.append(", ").append(locked);
 
         sb.append(")");
         return sb.toString();

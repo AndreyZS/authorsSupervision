@@ -13,7 +13,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row4;
+import org.jooq.Row7;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -67,6 +67,21 @@ public class UserSystem extends TableImpl<UserSystemRecord> {
      * The column <code>user_system.date_change_password</code>.
      */
     public final TableField<UserSystemRecord, LocalDate> DATE_CHANGE_PASSWORD = createField(DSL.name("date_change_password"), SQLDataType.LOCALDATE, this, "");
+
+    /**
+     * The column <code>user_system.date_registration</code>.
+     */
+    public final TableField<UserSystemRecord, LocalDate> DATE_REGISTRATION = createField(DSL.name("date_registration"), SQLDataType.LOCALDATE.nullable(false), this, "");
+
+    /**
+     * The column <code>user_system.online_date</code>.
+     */
+    public final TableField<UserSystemRecord, LocalDate> ONLINE_DATE = createField(DSL.name("online_date"), SQLDataType.LOCALDATE.nullable(false), this, "");
+
+    /**
+     * The column <code>user_system.locked</code>.
+     */
+    public final TableField<UserSystemRecord, Boolean> LOCKED = createField(DSL.name("locked"), SQLDataType.BOOLEAN.nullable(false).defaultValue(DSL.field("false", SQLDataType.BOOLEAN)), this, "");
 
     private UserSystem(Name alias, Table<UserSystemRecord> aliased) {
         this(alias, aliased, null);
@@ -148,11 +163,11 @@ public class UserSystem extends TableImpl<UserSystemRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row4 type methods
+    // Row7 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row4<Long, String, String, LocalDate> fieldsRow() {
-        return (Row4) super.fieldsRow();
+    public Row7<Long, String, String, LocalDate, LocalDate, LocalDate, Boolean> fieldsRow() {
+        return (Row7) super.fieldsRow();
     }
 }

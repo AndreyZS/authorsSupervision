@@ -15,7 +15,13 @@ import org.springframework.stereotype.Service
 import org.springframework.util.StringUtils
 import org.springframework.web.filter.GenericFilterBean
 import ru.alexandra_incr.authorssupervision.dto.AuthorizedUser
+import ru.alexandra_incr.authorssupervision.dto.JwtAndStatus
+import ru.alexandra_incr.authorssupervision.dto.NewPassword
+import ru.alexandra_incr.authorssupervision.dto.StatusPassword
+import ru.alexandra_incr.authorssupervision.exceptions.LockedException
+import ru.alexandra_incr.authorssupervision.exceptions.PasswordException
 import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 import java.util.*
 import javax.servlet.FilterChain
 import javax.servlet.ServletRequest
@@ -38,7 +44,12 @@ class AuthenticationService(
 
     fun authorization(login: String, password: String) =
         when (val data = userService.getUserByLoginAndPassword(login, password)) {
-            is AuthorizedUser -> createJWT(data)
+            is AuthorizedUser -> {
+                if (!data.locked)
+                    JwtAndStatus(createJWT(data), StatusPassword(data.dateChangePassword))
+                else
+                    throw LockedException("пользователь заблокирован")
+            }
             else -> throw Exception("вы не авторизованы")
         }
 
@@ -62,6 +73,7 @@ class AuthenticationService(
             .withClaim("login", payload.login)
             .withClaim("dateChangePassword", payload.dateChangePassword.toString())
             .withArrayClaim("roles", payload.listRoles.map { it.authority }.toTypedArray())
+            .withClaim("locked",payload.locked)
             .sign(algorithm)
     }
 
@@ -77,11 +89,12 @@ class AuthenticationService(
                     id = jwt.claims["id"]!!.asLong(),
                     login = jwt.claims["login"]!!.asString(),
                     listRoles = jwt.claims["roles"]!!.asList(String::class.java).map { SimpleGrantedAuthority(it) },
-                    dateChangePassword = dateToken
+                    dateChangePassword = dateToken,
+                    locked = jwt.claims["locked"]!!.asBoolean()
                 )
                 return UsernamePasswordAuthenticationToken(userDetails, null, userDetails.authorities)
             } else
-                throw Exception("Смените пароль")
+                throw PasswordException("Смените пароль")
         } catch (e: Exception) {
             throw Exception("Ваша сессия закончилась")
         }
@@ -89,8 +102,8 @@ class AuthenticationService(
 
     private fun checkDateChangePassword(date: LocalDate): Boolean {
         val nowDate = LocalDate.now()
-        //TODO проверка на 60 дней
-        return true
+        val x = ChronoUnit.DAYS.between(date, nowDate)
+        return x<60
     }
 
     private fun getTokenFromRequest(request: HttpServletRequest): String? {

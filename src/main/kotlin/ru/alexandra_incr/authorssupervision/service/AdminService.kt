@@ -12,7 +12,6 @@ class AdminService(
     private val dslContext: DSLContext,
 ) {
 
-
     fun getListHistoryPassword(): List<Test> {
         val map = mutableMapOf<Long, Test>()
         dslContext.select().from(USER_SYSTEM)

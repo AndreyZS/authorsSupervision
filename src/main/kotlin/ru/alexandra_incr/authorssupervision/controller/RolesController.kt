@@ -17,7 +17,7 @@ class RolesController {
         tags = ["role"]
     )
     fun getRoles(): List<Roles> {
-       return Roles.values().filterNot { it!=Roles.ADMIN }
+       return Roles.values().filterNot { it==Roles.ADMIN }
     }
 
 

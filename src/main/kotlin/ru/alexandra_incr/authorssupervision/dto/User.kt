@@ -6,7 +6,13 @@ import java.time.LocalDate
 
 sealed interface UserSystem
 
-class AuthorizedUser(val id: Long, val login: String, val listRoles: List<GrantedAuthority>,val dateChangePassword:LocalDate?) :
+class AuthorizedUser(
+    val id: Long,
+    val login: String,
+    val listRoles: List<GrantedAuthority>,
+    val dateChangePassword: LocalDate,
+    val locked: Boolean,
+) :
     UserSystem, UserDetails {
     override fun getAuthorities(): Collection<GrantedAuthority> {
         return listRoles
@@ -26,7 +32,7 @@ class AuthorizedUser(val id: Long, val login: String, val listRoles: List<Grante
     }
 
     override fun isAccountNonLocked(): Boolean {
-        return true
+        return locked
     }
 
     override fun isCredentialsNonExpired(): Boolean {
@@ -41,15 +47,15 @@ class AuthorizedUser(val id: Long, val login: String, val listRoles: List<Grante
 object Anonymous : UserSystem, UserDetails {
     override fun getAuthorities(): List<GrantedAuthority> = listOf()
 
-    override fun getPassword(): String  = ""
+    override fun getPassword(): String = ""
 
     override fun getUsername(): String = "anonymous"
 
     override fun isAccountNonExpired(): Boolean = true
 
-    override fun isAccountNonLocked(): Boolean =true
+    override fun isAccountNonLocked(): Boolean = true
 
-    override fun isCredentialsNonExpired(): Boolean =true
+    override fun isCredentialsNonExpired(): Boolean = true
 
-    override fun isEnabled(): Boolean =true
+    override fun isEnabled(): Boolean = true
 }

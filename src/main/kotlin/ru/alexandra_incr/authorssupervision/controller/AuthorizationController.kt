@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
+import ru.alexandra_incr.authorssupervision.dto.JwtAndStatus
 import ru.alexandra_incr.authorssupervision.dto.RegistrationDTO
 import ru.alexandra_incr.authorssupervision.service.AuthenticationService
 import ru.alexandra_incr.authorssupervision.service.UserService
@@ -28,8 +29,10 @@ class AuthorizationController(
         description = "Принимает логин и пароль, если они верны возвращает токен",
         tags = ["account"]
     )
-    fun auth(@RequestParam("login") login:String,@RequestParam("password") password:String): String {
-       return authenticationService.authorization(login,password)
+    fun auth(@RequestParam("login") login:String,@RequestParam("password") password:String): JwtAndStatus {
+       return authenticationService.authorization(login,password).apply {
+           println(this)
+       }
     }
 
     @PostMapping("registration")

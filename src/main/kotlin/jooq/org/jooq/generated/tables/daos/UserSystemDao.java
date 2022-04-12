@@ -111,4 +111,49 @@ public class UserSystemDao extends DAOImpl<UserSystemRecord, org.jooq.generated.
     public List<org.jooq.generated.tables.pojos.UserSystem> fetchByDateChangePassword(LocalDate... values) {
         return fetch(UserSystem.USER_SYSTEM.DATE_CHANGE_PASSWORD, values);
     }
+
+    /**
+     * Fetch records that have <code>date_registration BETWEEN lowerInclusive
+     * AND upperInclusive</code>
+     */
+    public List<org.jooq.generated.tables.pojos.UserSystem> fetchRangeOfDateRegistration(LocalDate lowerInclusive, LocalDate upperInclusive) {
+        return fetchRange(UserSystem.USER_SYSTEM.DATE_REGISTRATION, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>date_registration IN (values)</code>
+     */
+    public List<org.jooq.generated.tables.pojos.UserSystem> fetchByDateRegistration(LocalDate... values) {
+        return fetch(UserSystem.USER_SYSTEM.DATE_REGISTRATION, values);
+    }
+
+    /**
+     * Fetch records that have <code>online_date BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<org.jooq.generated.tables.pojos.UserSystem> fetchRangeOfOnlineDate(LocalDate lowerInclusive, LocalDate upperInclusive) {
+        return fetchRange(UserSystem.USER_SYSTEM.ONLINE_DATE, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>online_date IN (values)</code>
+     */
+    public List<org.jooq.generated.tables.pojos.UserSystem> fetchByOnlineDate(LocalDate... values) {
+        return fetch(UserSystem.USER_SYSTEM.ONLINE_DATE, values);
+    }
+
+    /**
+     * Fetch records that have <code>locked BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<org.jooq.generated.tables.pojos.UserSystem> fetchRangeOfLocked(Boolean lowerInclusive, Boolean upperInclusive) {
+        return fetchRange(UserSystem.USER_SYSTEM.LOCKED, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>locked IN (values)</code>
+     */
+    public List<org.jooq.generated.tables.pojos.UserSystem> fetchByLocked(Boolean... values) {
+        return fetch(UserSystem.USER_SYSTEM.LOCKED, values);
+    }
 }

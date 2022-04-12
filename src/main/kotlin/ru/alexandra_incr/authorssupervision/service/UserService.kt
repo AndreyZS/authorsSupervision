@@ -10,25 +10,35 @@ import org.jooq.generated.tables.UserSystem
 import org.jooq.generated.tables.UserSystem.USER_SYSTEM
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.context.annotation.PropertySource
+import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
 import ru.alexandra_incr.authorssupervision.dto.Anonymous
 import ru.alexandra_incr.authorssupervision.dto.AuthorizedUser
+import ru.alexandra_incr.authorssupervision.exceptions.PasswordException
 import ru.alexandra_incr.authorssupervision.exceptions.RegistrationException
 import java.time.LocalDate
+import java.time.temporal.ChronoUnit
 
 @Service
+@PropertySource("classpath:secret.properties")
 class UserService(
     private val dslContext: DSLContext,
     private val bCryptPasswordEncoder: BCryptPasswordEncoder,
     private val rolesService: RolesService,
+    @Value("\${size_password}")
+    private val sizePassword: Int,
 ) {
-    val findUser: (Condition) -> Record =  USER_SYSTEM.findByOne(dslContext)
+    val findUser: (Condition) -> Record = USER_SYSTEM.findByOne(dslContext)
     var logger: Logger = LoggerFactory.getLogger(UserService::class.java)
 
     fun changePassword(id: Long, password: String, newPassword: String) {
+        if (newPassword.length < sizePassword)
+            throw PasswordException("пароль слишком короткий")
         if (password != newPassword) {
             val user = findUser(USER_SYSTEM.ID.eq(id))
             if (bCryptPasswordEncoder.matches(password, user[USER_SYSTEM.PASSWORD])) {
@@ -57,20 +67,32 @@ class UserService(
                     .innerJoin(ACCESS_RIGHTS_USERS)
                     .on(ACCESS_RIGHTS_USERS.USES_SYSTEM.eq(record[USER_SYSTEM.ID]))
                     .fetch().map { roles -> SimpleGrantedAuthority(roles[AccessRights.ACCESS_RIGHTS.NAME]) }
+                dslContext.update(USER_SYSTEM)
+                    .set(USER_SYSTEM.ONLINE_DATE,LocalDate.now())
+                    .where(USER_SYSTEM.ID.eq(record[USER_SYSTEM.ID]))
+                    .execute()
                 AuthorizedUser(record[USER_SYSTEM.ID],
                     record[USER_SYSTEM.LOGIN],
                     roles,
-                    record[USER_SYSTEM.DATE_CHANGE_PASSWORD])
+                    record[USER_SYSTEM.DATE_CHANGE_PASSWORD],
+                    record[USER_SYSTEM.LOCKED]
+                )
             } else
                 Anonymous
 
         } ?: Anonymous
 
     fun registration(login: String, password: String, roles: List<String>) {
+        if (password.length < sizePassword)
+            throw PasswordException("пароль слишком короткий")
+
         val id = try {
             dslContext.insertInto(USER_SYSTEM)
                 .set(USER_SYSTEM.LOGIN, login)
                 .set(USER_SYSTEM.PASSWORD, bCryptPasswordEncoder.encode(password))
+                .set(USER_SYSTEM.DATE_CHANGE_PASSWORD, LocalDate.now())
+                .set(USER_SYSTEM.DATE_REGISTRATION, LocalDate.now())
+                .set(USER_SYSTEM.ONLINE_DATE,LocalDate.now())
                 .returning().fetchOne()?.get(USER_SYSTEM.ID)
         } catch (e: Exception) {
             logger.error(e.message)
@@ -83,6 +105,21 @@ class UserService(
         }
         dslContext.batch(listInsert).execute()
         logger.info("Пользователь $login зарегистрировался")
+    }
+
+    @Scheduled(cron = "0 0 0 */1 * ?")
+    private fun blockOldUser() {
+        val listID = dslContext.select().from(USER_SYSTEM)
+            .fetch().map { value ->
+                if (120 >= ChronoUnit.DAYS.between(value[USER_SYSTEM.ONLINE_DATE], LocalDate.now())) {
+                    value[USER_SYSTEM.ID]
+                } else
+                    null
+            }.filterNotNull()
+        dslContext.update(USER_SYSTEM)
+            .set(USER_SYSTEM.LOCKED, true)
+            .where(USER_SYSTEM.ID.`in`(listID))
+            .execute()
     }
 }
 
