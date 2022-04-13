@@ -41,7 +41,7 @@ class AuthorizationController(
         tags = ["account"]
     )
     fun registration(@RequestBody registrationData: RegistrationDTO){
-        userService.registration(registrationData.login,registrationData.password,registrationData.roles)
+        userService.registration(registrationData.fio,registrationData.login,registrationData.password,registrationData.roles,registrationData.nameDivision)
     }
 
     @GetMapping("admin")

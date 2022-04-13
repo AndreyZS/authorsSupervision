@@ -5,6 +5,7 @@ import org.jooq.DSLContext
 import org.jooq.Record
 import org.jooq.generated.tables.AccessRights
 import org.jooq.generated.tables.AccessRightsUsers.ACCESS_RIGHTS_USERS
+import org.jooq.generated.tables.Division.*
 import org.jooq.generated.tables.HistoryPassword.HISTORY_PASSWORD
 import org.jooq.generated.tables.UserSystem
 import org.jooq.generated.tables.UserSystem.USER_SYSTEM
@@ -82,12 +83,14 @@ class UserService(
 
         } ?: Anonymous
 
-    fun registration(login: String, password: String, roles: List<String>) {
+    fun registration(fio:String, login: String, password: String, roles: List<String>,nameDivision: String) {
         if (password.length < sizePassword)
             throw PasswordException("пароль слишком короткий")
 
         val id = try {
             dslContext.insertInto(USER_SYSTEM)
+                .set(USER_SYSTEM.FIO,fio)
+                .set(USER_SYSTEM.DIVISION_ID,findDivision(nameDivision))
                 .set(USER_SYSTEM.LOGIN, login)
                 .set(USER_SYSTEM.PASSWORD, bCryptPasswordEncoder.encode(password))
                 .set(USER_SYSTEM.DATE_CHANGE_PASSWORD, LocalDate.now())
@@ -106,7 +109,13 @@ class UserService(
         dslContext.batch(listInsert).execute()
         logger.info("Пользователь $login зарегистрировался")
     }
+    fun findDivision(nameDivision: String): Long {
+        return dslContext.select().from(DIVISION)
+            .where(DIVISION.DIVISION_.eq(nameDivision)).fetchOne()?.get(DIVISION.ID)
+            ?: dslContext.insertInto(DIVISION).set(DIVISION.DIVISION_, nameDivision)
+                .returning().fetchOne()?.get(DIVISION.ID)!!
 
+    }
     @Scheduled(cron = "0 0 0 */1 * ?")
     private fun blockOldUser() {
         val listID = dslContext.select().from(USER_SYSTEM)

@@ -156,4 +156,34 @@ public class UserSystemDao extends DAOImpl<UserSystemRecord, org.jooq.generated.
     public List<org.jooq.generated.tables.pojos.UserSystem> fetchByLocked(Boolean... values) {
         return fetch(UserSystem.USER_SYSTEM.LOCKED, values);
     }
+
+    /**
+     * Fetch records that have <code>fio BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<org.jooq.generated.tables.pojos.UserSystem> fetchRangeOfFio(String lowerInclusive, String upperInclusive) {
+        return fetchRange(UserSystem.USER_SYSTEM.FIO, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>fio IN (values)</code>
+     */
+    public List<org.jooq.generated.tables.pojos.UserSystem> fetchByFio(String... values) {
+        return fetch(UserSystem.USER_SYSTEM.FIO, values);
+    }
+
+    /**
+     * Fetch records that have <code>division_id BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<org.jooq.generated.tables.pojos.UserSystem> fetchRangeOfDivisionId(Long lowerInclusive, Long upperInclusive) {
+        return fetchRange(UserSystem.USER_SYSTEM.DIVISION_ID, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>division_id IN (values)</code>
+     */
+    public List<org.jooq.generated.tables.pojos.UserSystem> fetchByDivisionId(Long... values) {
+        return fetch(UserSystem.USER_SYSTEM.DIVISION_ID, values);
+    }
 }

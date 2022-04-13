@@ -23,6 +23,8 @@ public class UserSystem implements Serializable {
     private final LocalDate dateRegistration;
     private final LocalDate onlineDate;
     private final Boolean   locked;
+    private final String    fio;
+    private final Long      divisionId;
 
     public UserSystem(UserSystem value) {
         this.id = value.id;
@@ -32,6 +34,8 @@ public class UserSystem implements Serializable {
         this.dateRegistration = value.dateRegistration;
         this.onlineDate = value.onlineDate;
         this.locked = value.locked;
+        this.fio = value.fio;
+        this.divisionId = value.divisionId;
     }
 
     public UserSystem(
@@ -41,7 +45,9 @@ public class UserSystem implements Serializable {
         LocalDate dateChangePassword,
         LocalDate dateRegistration,
         LocalDate onlineDate,
-        Boolean   locked
+        Boolean   locked,
+        String    fio,
+        Long      divisionId
     ) {
         this.id = id;
         this.login = login;
@@ -50,6 +56,8 @@ public class UserSystem implements Serializable {
         this.dateRegistration = dateRegistration;
         this.onlineDate = onlineDate;
         this.locked = locked;
+        this.fio = fio;
+        this.divisionId = divisionId;
     }
 
     /**
@@ -99,6 +107,20 @@ public class UserSystem implements Serializable {
      */
     public Boolean getLocked() {
         return this.locked;
+    }
+
+    /**
+     * Getter for <code>user_system.fio</code>.
+     */
+    public String getFio() {
+        return this.fio;
+    }
+
+    /**
+     * Getter for <code>user_system.division_id</code>.
+     */
+    public Long getDivisionId() {
+        return this.divisionId;
     }
 
     @Override
@@ -152,6 +174,18 @@ public class UserSystem implements Serializable {
         }
         else if (!locked.equals(other.locked))
             return false;
+        if (fio == null) {
+            if (other.fio != null)
+                return false;
+        }
+        else if (!fio.equals(other.fio))
+            return false;
+        if (divisionId == null) {
+            if (other.divisionId != null)
+                return false;
+        }
+        else if (!divisionId.equals(other.divisionId))
+            return false;
         return true;
     }
 
@@ -166,6 +200,8 @@ public class UserSystem implements Serializable {
         result = prime * result + ((this.dateRegistration == null) ? 0 : this.dateRegistration.hashCode());
         result = prime * result + ((this.onlineDate == null) ? 0 : this.onlineDate.hashCode());
         result = prime * result + ((this.locked == null) ? 0 : this.locked.hashCode());
+        result = prime * result + ((this.fio == null) ? 0 : this.fio.hashCode());
+        result = prime * result + ((this.divisionId == null) ? 0 : this.divisionId.hashCode());
         return result;
     }
 
@@ -180,6 +216,8 @@ public class UserSystem implements Serializable {
         sb.append(", ").append(dateRegistration);
         sb.append(", ").append(onlineDate);
         sb.append(", ").append(locked);
+        sb.append(", ").append(fio);
+        sb.append(", ").append(divisionId);
 
         sb.append(")");
         return sb.toString();

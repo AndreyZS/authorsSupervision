@@ -13,7 +13,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row7;
+import org.jooq.Row9;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -83,6 +83,16 @@ public class UserSystem extends TableImpl<UserSystemRecord> {
      */
     public final TableField<UserSystemRecord, Boolean> LOCKED = createField(DSL.name("locked"), SQLDataType.BOOLEAN.nullable(false).defaultValue(DSL.field("false", SQLDataType.BOOLEAN)), this, "");
 
+    /**
+     * The column <code>user_system.fio</code>.
+     */
+    public final TableField<UserSystemRecord, String> FIO = createField(DSL.name("fio"), SQLDataType.CLOB.nullable(false), this, "");
+
+    /**
+     * The column <code>user_system.division_id</code>.
+     */
+    public final TableField<UserSystemRecord, Long> DIVISION_ID = createField(DSL.name("division_id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
+
     private UserSystem(Name alias, Table<UserSystemRecord> aliased) {
         this(alias, aliased, null);
     }
@@ -137,6 +147,20 @@ public class UserSystem extends TableImpl<UserSystemRecord> {
     }
 
     @Override
+    public List<ForeignKey<UserSystemRecord, ?>> getReferences() {
+        return Arrays.asList(Keys.USER_SYSTEM__FK_DIVISION_USER_SYSTEM);
+    }
+
+    private transient Division _division;
+
+    public Division division() {
+        if (_division == null)
+            _division = new Division(this, Keys.USER_SYSTEM__FK_DIVISION_USER_SYSTEM);
+
+        return _division;
+    }
+
+    @Override
     public UserSystem as(String alias) {
         return new UserSystem(DSL.name(alias), this);
     }
@@ -163,11 +187,11 @@ public class UserSystem extends TableImpl<UserSystemRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row7 type methods
+    // Row9 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row7<Long, String, String, LocalDate, LocalDate, LocalDate, Boolean> fieldsRow() {
-        return (Row7) super.fieldsRow();
+    public Row9<Long, String, String, LocalDate, LocalDate, LocalDate, Boolean, String, Long> fieldsRow() {
+        return (Row9) super.fieldsRow();
     }
 }

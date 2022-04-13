@@ -11,6 +11,7 @@ import org.jooq.Catalog;
 import org.jooq.Table;
 import org.jooq.generated.tables.AccessRights;
 import org.jooq.generated.tables.AccessRightsUsers;
+import org.jooq.generated.tables.Division;
 import org.jooq.generated.tables.FlywaySchemaHistory;
 import org.jooq.generated.tables.HistoryPassword;
 import org.jooq.generated.tables.UserSystem;
@@ -39,6 +40,11 @@ public class DefaultSchema extends SchemaImpl {
      * The table <code>access_rights_users</code>.
      */
     public final AccessRightsUsers ACCESS_RIGHTS_USERS = AccessRightsUsers.ACCESS_RIGHTS_USERS;
+
+    /**
+     * The table <code>division</code>.
+     */
+    public final Division DIVISION = Division.DIVISION;
 
     /**
      * The table <code>flyway_schema_history</code>.
@@ -73,6 +79,7 @@ public class DefaultSchema extends SchemaImpl {
         return Arrays.asList(
             AccessRights.ACCESS_RIGHTS,
             AccessRightsUsers.ACCESS_RIGHTS_USERS,
+            Division.DIVISION,
             FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY,
             HistoryPassword.HISTORY_PASSWORD,
             UserSystem.USER_SYSTEM
