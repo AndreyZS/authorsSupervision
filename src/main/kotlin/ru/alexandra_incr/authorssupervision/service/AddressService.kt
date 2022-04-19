@@ -15,7 +15,7 @@ class AddressService(
     private val dslContext: DSLContext,
 ) {
 
-    private fun getOrCreateLocation(addressDTO: AddressDTO): AddressDTO {
+    fun getOrCreatAddress(addressDTO: AddressDTO): AddressDTO {
         val res = getOrCreateWorkshop(addressDTO.workshop, addressDTO.company)
         val location = (get(addressDTO.location, LOCATION) ?: set(LOCATION, Pair("name", addressDTO.location),
             Pair("workshop_id", res.workshopId)))
