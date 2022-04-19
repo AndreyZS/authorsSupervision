@@ -8,13 +8,20 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.jooq.Catalog;
+import org.jooq.Sequence;
 import org.jooq.Table;
 import org.jooq.generated.tables.AccessRights;
 import org.jooq.generated.tables.AccessRightsUsers;
+import org.jooq.generated.tables.Company;
 import org.jooq.generated.tables.Division;
 import org.jooq.generated.tables.FlywaySchemaHistory;
 import org.jooq.generated.tables.HistoryPassword;
+import org.jooq.generated.tables.ListEspeciallyDangerousWork;
+import org.jooq.generated.tables.Location;
+import org.jooq.generated.tables.SignDanger;
 import org.jooq.generated.tables.UserSystem;
+import org.jooq.generated.tables.WorkPlan;
+import org.jooq.generated.tables.Workshop;
 import org.jooq.impl.SchemaImpl;
 
 
@@ -42,6 +49,11 @@ public class DefaultSchema extends SchemaImpl {
     public final AccessRightsUsers ACCESS_RIGHTS_USERS = AccessRightsUsers.ACCESS_RIGHTS_USERS;
 
     /**
+     * The table <code>company</code>.
+     */
+    public final Company COMPANY = Company.COMPANY;
+
+    /**
      * The table <code>division</code>.
      */
     public final Division DIVISION = Division.DIVISION;
@@ -57,9 +69,34 @@ public class DefaultSchema extends SchemaImpl {
     public final HistoryPassword HISTORY_PASSWORD = HistoryPassword.HISTORY_PASSWORD;
 
     /**
+     * The table <code>list_especially_dangerous_work</code>.
+     */
+    public final ListEspeciallyDangerousWork LIST_ESPECIALLY_DANGEROUS_WORK = ListEspeciallyDangerousWork.LIST_ESPECIALLY_DANGEROUS_WORK;
+
+    /**
+     * The table <code>location</code>.
+     */
+    public final Location LOCATION = Location.LOCATION;
+
+    /**
+     * The table <code>sign_danger</code>.
+     */
+    public final SignDanger SIGN_DANGER = SignDanger.SIGN_DANGER;
+
+    /**
      * The table <code>user_system</code>.
      */
     public final UserSystem USER_SYSTEM = UserSystem.USER_SYSTEM;
+
+    /**
+     * The table <code>work_plan</code>.
+     */
+    public final WorkPlan WORK_PLAN = WorkPlan.WORK_PLAN;
+
+    /**
+     * The table <code>workshop</code>.
+     */
+    public final Workshop WORKSHOP = Workshop.WORKSHOP;
 
     /**
      * No further instances allowed
@@ -75,14 +112,27 @@ public class DefaultSchema extends SchemaImpl {
     }
 
     @Override
+    public final List<Sequence<?>> getSequences() {
+        return Arrays.asList(
+            Sequences.SEQUENCE_GENERATOR
+        );
+    }
+
+    @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
             AccessRights.ACCESS_RIGHTS,
             AccessRightsUsers.ACCESS_RIGHTS_USERS,
+            Company.COMPANY,
             Division.DIVISION,
             FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY,
             HistoryPassword.HISTORY_PASSWORD,
-            UserSystem.USER_SYSTEM
+            ListEspeciallyDangerousWork.LIST_ESPECIALLY_DANGEROUS_WORK,
+            Location.LOCATION,
+            SignDanger.SIGN_DANGER,
+            UserSystem.USER_SYSTEM,
+            WorkPlan.WORK_PLAN,
+            Workshop.WORKSHOP
         );
     }
 }

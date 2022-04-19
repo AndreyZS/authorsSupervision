@@ -18,6 +18,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
+import ru.alexandra_incr.authorssupervision.config.Roles
 import ru.alexandra_incr.authorssupervision.dto.Anonymous
 import ru.alexandra_incr.authorssupervision.dto.AuthorizedUser
 import ru.alexandra_incr.authorssupervision.exceptions.PasswordException
@@ -83,7 +84,7 @@ class UserService(
 
         } ?: Anonymous
 
-    fun registration(fio:String, login: String, password: String, roles: List<String>,nameDivision: String) {
+    fun registration(fio:String, login: String, password: String, roles: List<Roles>,nameDivision: String) {
         if (password.length < sizePassword)
             throw PasswordException("пароль слишком короткий")
 
@@ -104,7 +105,7 @@ class UserService(
         val listInsert = roles.map {
             dslContext.insertInto(ACCESS_RIGHTS_USERS)
                 .set(ACCESS_RIGHTS_USERS.USES_SYSTEM, id)
-                .set(ACCESS_RIGHTS_USERS.ACCESS_RIGHTS_ID, rolesService.findOrCreate(it))
+                .set(ACCESS_RIGHTS_USERS.ACCESS_RIGHTS_ID, rolesService.findOrCreate(it.name))
         }
         dslContext.batch(listInsert).execute()
         logger.info("Пользователь $login зарегистрировался")

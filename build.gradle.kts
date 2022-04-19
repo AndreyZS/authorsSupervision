@@ -55,7 +55,7 @@ jooq{
                     driver = "org.postgresql.Driver"
                     url = "jdbc:postgresql://localhost:5432/database"
                     user = "postgres"
-                    password = "amsams"
+                    password = "5213"
                 }
                 generator.apply {
                     name = "org.jooq.codegen.DefaultGenerator"

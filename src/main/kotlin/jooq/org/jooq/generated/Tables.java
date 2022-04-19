@@ -6,10 +6,16 @@ package org.jooq.generated;
 
 import org.jooq.generated.tables.AccessRights;
 import org.jooq.generated.tables.AccessRightsUsers;
+import org.jooq.generated.tables.Company;
 import org.jooq.generated.tables.Division;
 import org.jooq.generated.tables.FlywaySchemaHistory;
 import org.jooq.generated.tables.HistoryPassword;
+import org.jooq.generated.tables.ListEspeciallyDangerousWork;
+import org.jooq.generated.tables.Location;
+import org.jooq.generated.tables.SignDanger;
 import org.jooq.generated.tables.UserSystem;
+import org.jooq.generated.tables.WorkPlan;
+import org.jooq.generated.tables.Workshop;
 
 
 /**
@@ -29,6 +35,11 @@ public class Tables {
     public static final AccessRightsUsers ACCESS_RIGHTS_USERS = AccessRightsUsers.ACCESS_RIGHTS_USERS;
 
     /**
+     * The table <code>company</code>.
+     */
+    public static final Company COMPANY = Company.COMPANY;
+
+    /**
      * The table <code>division</code>.
      */
     public static final Division DIVISION = Division.DIVISION;
@@ -44,7 +55,32 @@ public class Tables {
     public static final HistoryPassword HISTORY_PASSWORD = HistoryPassword.HISTORY_PASSWORD;
 
     /**
+     * The table <code>list_especially_dangerous_work</code>.
+     */
+    public static final ListEspeciallyDangerousWork LIST_ESPECIALLY_DANGEROUS_WORK = ListEspeciallyDangerousWork.LIST_ESPECIALLY_DANGEROUS_WORK;
+
+    /**
+     * The table <code>location</code>.
+     */
+    public static final Location LOCATION = Location.LOCATION;
+
+    /**
+     * The table <code>sign_danger</code>.
+     */
+    public static final SignDanger SIGN_DANGER = SignDanger.SIGN_DANGER;
+
+    /**
      * The table <code>user_system</code>.
      */
     public static final UserSystem USER_SYSTEM = UserSystem.USER_SYSTEM;
+
+    /**
+     * The table <code>work_plan</code>.
+     */
+    public static final WorkPlan WORK_PLAN = WorkPlan.WORK_PLAN;
+
+    /**
+     * The table <code>workshop</code>.
+     */
+    public static final Workshop WORKSHOP = Workshop.WORKSHOP;
 }
