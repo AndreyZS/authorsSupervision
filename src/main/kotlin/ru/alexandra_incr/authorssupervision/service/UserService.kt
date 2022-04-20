@@ -67,7 +67,8 @@ class UserService(
             if (verification) {
                 val roles = dslContext.select().from(AccessRights.ACCESS_RIGHTS)
                     .innerJoin(ACCESS_RIGHTS_USERS)
-                    .on(ACCESS_RIGHTS_USERS.USES_SYSTEM.eq(record[USER_SYSTEM.ID]))
+                    .on(ACCESS_RIGHTS_USERS.USES_SYSTEM.eq(AccessRights.ACCESS_RIGHTS.ID))
+                    .where(ACCESS_RIGHTS_USERS.USES_SYSTEM.eq(record[USER_SYSTEM.ID]))
                     .fetch().map { roles -> SimpleGrantedAuthority(roles[AccessRights.ACCESS_RIGHTS.NAME]) }
                 dslContext.update(USER_SYSTEM)
                     .set(USER_SYSTEM.ONLINE_DATE,LocalDate.now())

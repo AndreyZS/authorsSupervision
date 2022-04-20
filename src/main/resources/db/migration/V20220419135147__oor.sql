@@ -45,7 +45,7 @@ create table list_especially_dangerous_work
         constraint fk_employee_oor references user_system on UPDATE restrict on delete restrict,
     sign_danger_id serial8
         constraint fk_sign_danger_oor references sign_danger on UPDATE restrict on delete restrict,
-    chief_engineer serial8 constraint fk_user_system_engeneer references sign_danger on UPDATE restrict on delete restrict,
+    chief_engineer serial8 constraint fk_user_system_engineer references user_system on UPDATE restrict on delete restrict,
     dateCheck timestamp,
     work_plan_id serial8
         constraint fk_work_plan_oor references work_plan on UPDATE restrict on delete restrict

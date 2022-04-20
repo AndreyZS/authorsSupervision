@@ -14,6 +14,7 @@ import org.jooq.generated.tables.AccessRights;
 import org.jooq.generated.tables.AccessRightsUsers;
 import org.jooq.generated.tables.Company;
 import org.jooq.generated.tables.Division;
+import org.jooq.generated.tables.EspeciallyDangerousOperations;
 import org.jooq.generated.tables.FlywaySchemaHistory;
 import org.jooq.generated.tables.HistoryPassword;
 import org.jooq.generated.tables.ListEspeciallyDangerousWork;
@@ -57,6 +58,11 @@ public class DefaultSchema extends SchemaImpl {
      * The table <code>division</code>.
      */
     public final Division DIVISION = Division.DIVISION;
+
+    /**
+     * The table <code>especially_dangerous_operations</code>.
+     */
+    public final EspeciallyDangerousOperations ESPECIALLY_DANGEROUS_OPERATIONS = EspeciallyDangerousOperations.ESPECIALLY_DANGEROUS_OPERATIONS;
 
     /**
      * The table <code>flyway_schema_history</code>.
@@ -125,6 +131,7 @@ public class DefaultSchema extends SchemaImpl {
             AccessRightsUsers.ACCESS_RIGHTS_USERS,
             Company.COMPANY,
             Division.DIVISION,
+            EspeciallyDangerousOperations.ESPECIALLY_DANGEROUS_OPERATIONS,
             FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY,
             HistoryPassword.HISTORY_PASSWORD,
             ListEspeciallyDangerousWork.LIST_ESPECIALLY_DANGEROUS_WORK,

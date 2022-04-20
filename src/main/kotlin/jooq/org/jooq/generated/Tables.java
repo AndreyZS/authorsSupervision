@@ -8,6 +8,7 @@ import org.jooq.generated.tables.AccessRights;
 import org.jooq.generated.tables.AccessRightsUsers;
 import org.jooq.generated.tables.Company;
 import org.jooq.generated.tables.Division;
+import org.jooq.generated.tables.EspeciallyDangerousOperations;
 import org.jooq.generated.tables.FlywaySchemaHistory;
 import org.jooq.generated.tables.HistoryPassword;
 import org.jooq.generated.tables.ListEspeciallyDangerousWork;
@@ -43,6 +44,11 @@ public class Tables {
      * The table <code>division</code>.
      */
     public static final Division DIVISION = Division.DIVISION;
+
+    /**
+     * The table <code>especially_dangerous_operations</code>.
+     */
+    public static final EspeciallyDangerousOperations ESPECIALLY_DANGEROUS_OPERATIONS = EspeciallyDangerousOperations.ESPECIALLY_DANGEROUS_OPERATIONS;
 
     /**
      * The table <code>flyway_schema_history</code>.

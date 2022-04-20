@@ -150,13 +150,13 @@ public class ListEspeciallyDangerousWork extends TableImpl<ListEspeciallyDangero
 
     @Override
     public List<ForeignKey<ListEspeciallyDangerousWorkRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.LIST_ESPECIALLY_DANGEROUS_WORK__FK_LOCATION_OOR, Keys.LIST_ESPECIALLY_DANGEROUS_WORK__FK_EMPLOYEE_OOR, Keys.LIST_ESPECIALLY_DANGEROUS_WORK__FK_SIGN_DANGER_OOR, Keys.LIST_ESPECIALLY_DANGEROUS_WORK__FK_USER_SYSTEM_ENGENEER, Keys.LIST_ESPECIALLY_DANGEROUS_WORK__FK_WORK_PLAN_OOR);
+        return Arrays.asList(Keys.LIST_ESPECIALLY_DANGEROUS_WORK__FK_LOCATION_OOR, Keys.LIST_ESPECIALLY_DANGEROUS_WORK__FK_EMPLOYEE_OOR, Keys.LIST_ESPECIALLY_DANGEROUS_WORK__FK_SIGN_DANGER_OOR, Keys.LIST_ESPECIALLY_DANGEROUS_WORK__FK_USER_SYSTEM_ENGINEER, Keys.LIST_ESPECIALLY_DANGEROUS_WORK__FK_WORK_PLAN_OOR);
     }
 
     private transient Location _location;
-    private transient UserSystem _userSystem;
-    private transient SignDanger _fkSignDangerOor;
-    private transient SignDanger _fkUserSystemEngeneer;
+    private transient UserSystem _fkEmployeeOor;
+    private transient SignDanger _signDanger;
+    private transient UserSystem _fkUserSystemEngineer;
     private transient WorkPlan _workPlan;
 
     public Location location() {
@@ -166,25 +166,25 @@ public class ListEspeciallyDangerousWork extends TableImpl<ListEspeciallyDangero
         return _location;
     }
 
-    public UserSystem userSystem() {
-        if (_userSystem == null)
-            _userSystem = new UserSystem(this, Keys.LIST_ESPECIALLY_DANGEROUS_WORK__FK_EMPLOYEE_OOR);
+    public UserSystem fkEmployeeOor() {
+        if (_fkEmployeeOor == null)
+            _fkEmployeeOor = new UserSystem(this, Keys.LIST_ESPECIALLY_DANGEROUS_WORK__FK_EMPLOYEE_OOR);
 
-        return _userSystem;
+        return _fkEmployeeOor;
     }
 
-    public SignDanger fkSignDangerOor() {
-        if (_fkSignDangerOor == null)
-            _fkSignDangerOor = new SignDanger(this, Keys.LIST_ESPECIALLY_DANGEROUS_WORK__FK_SIGN_DANGER_OOR);
+    public SignDanger signDanger() {
+        if (_signDanger == null)
+            _signDanger = new SignDanger(this, Keys.LIST_ESPECIALLY_DANGEROUS_WORK__FK_SIGN_DANGER_OOR);
 
-        return _fkSignDangerOor;
+        return _signDanger;
     }
 
-    public SignDanger fkUserSystemEngeneer() {
-        if (_fkUserSystemEngeneer == null)
-            _fkUserSystemEngeneer = new SignDanger(this, Keys.LIST_ESPECIALLY_DANGEROUS_WORK__FK_USER_SYSTEM_ENGENEER);
+    public UserSystem fkUserSystemEngineer() {
+        if (_fkUserSystemEngineer == null)
+            _fkUserSystemEngineer = new UserSystem(this, Keys.LIST_ESPECIALLY_DANGEROUS_WORK__FK_USER_SYSTEM_ENGINEER);
 
-        return _fkUserSystemEngeneer;
+        return _fkUserSystemEngineer;
     }
 
     public WorkPlan workPlan() {
