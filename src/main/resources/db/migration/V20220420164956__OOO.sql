@@ -4,7 +4,7 @@ create table especially_dangerous_operations(
     date_start  timestamp,
     date_stop   timestamp,
     employee_id serial8
-        constraint fk_employee_oor references user_system on UPDATE restrict on delete restrict,
+        constraint fk_employee_ooo references user_system on UPDATE restrict on delete restrict,
     chief_engineer serial8 constraint fk_user_system_engineer references user_system on UPDATE restrict on delete restrict,
     dateCheck timestamp,
     location_id serial8

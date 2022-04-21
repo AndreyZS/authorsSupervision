@@ -16,6 +16,24 @@ import org.jooq.impl.SQLDataType;
 public class Sequences {
 
     /**
+     * The sequence
+     * <code>architectural_supervision_sch_architectural_supervision_sch_seq</code>
+     */
+    public static final Sequence<Long> ARCHITECTURAL_SUPERVISION_SCH_ARCHITECTURAL_SUPERVISION_SCH_SEQ = Internal.createSequence("architectural_supervision_sch_architectural_supervision_sch_seq", DefaultSchema.DEFAULT_SCHEMA, SQLDataType.BIGINT.nullable(false), null, null, null, null, false, null);
+
+    /**
+     * The sequence
+     * <code>architectural_supervision_sch_especially_dangerous_operatio_seq</code>
+     */
+    public static final Sequence<Long> ARCHITECTURAL_SUPERVISION_SCH_ESPECIALLY_DANGEROUS_OPERATIO_SEQ = Internal.createSequence("architectural_supervision_sch_especially_dangerous_operatio_seq", DefaultSchema.DEFAULT_SCHEMA, SQLDataType.BIGINT.nullable(false), null, null, null, null, false, null);
+
+    /**
+     * The sequence
+     * <code>copyright_supervision_report__copyright_supervision_report__seq</code>
+     */
+    public static final Sequence<Long> COPYRIGHT_SUPERVISION_REPORT__COPYRIGHT_SUPERVISION_REPORT__SEQ = Internal.createSequence("copyright_supervision_report__copyright_supervision_report__seq", DefaultSchema.DEFAULT_SCHEMA, SQLDataType.BIGINT.nullable(false), null, null, null, null, false, null);
+
+    /**
      * The sequence <code>sequence_generator</code>
      */
     public static final Sequence<Long> SEQUENCE_GENERATOR = Internal.createSequence("sequence_generator", DefaultSchema.DEFAULT_SCHEMA, SQLDataType.BIGINT.nullable(false), 1050, 50, null, null, false, null);

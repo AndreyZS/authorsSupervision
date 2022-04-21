@@ -17,21 +17,21 @@ data class OORAndWorkPlan(val oor: OORDto,val workPlan: WorkPlan)
 data class StatusCheck(val date:LocalDateTime)
 
 @RestController
-@RequestMapping("oor")
+@RequestMapping("list-oor")
 @SecurityRequirement(name = "jwt")
 class OORController(
     private val oorService: OORService,
     private val securityUtils: SecurityUtils
 ) {
 
-    @PostMapping("create")
+    @PostMapping("oor/create")
     fun create(@RequestBody oorDto: OORAndWorkPlan){
         //TODO ИСПРАВИТЬ ВИНЖЕНЕРА ПО УМОЛЧАНИЮ
         oorService.create(oorDto.oor,oorDto.workPlan,securityUtils.getID()!!)
     }
 
-    @PutMapping("check")
+    @PutMapping("engineer/check")
     fun check(@RequestParam oorID:Long,@RequestBody statusCheck: StatusCheck){
-        oorService.update(oorID,statusCheck,securityUtils.getID()!!)
+        oorService.checkEngineer(oorID,statusCheck,securityUtils.getID()!!)
     }
 }

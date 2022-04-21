@@ -3,6 +3,7 @@ package ru.alexandra_incr.authorssupervision.service
 import org.jooq.Condition
 import org.jooq.DSLContext
 import org.jooq.Record
+import org.jooq.Table
 import org.jooq.generated.tables.AccessRights
 import org.jooq.generated.tables.AccessRightsUsers.ACCESS_RIGHTS_USERS
 import org.jooq.generated.tables.Division.*
@@ -135,7 +136,7 @@ class UserService(
 }
 
 
-fun UserSystem.findByOne(dslContext: DSLContext): (Condition) -> Record = { predict ->
+fun Table<*>.findByOne(dslContext: DSLContext): (Condition) -> Record = { predict ->
     dslContext.select()
         .from(this)
         .where(predict)

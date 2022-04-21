@@ -25,6 +25,7 @@ public class EspeciallyDangerousOperations implements Serializable {
     private final LocalDateTime datecheck;
     private final Long          locationId;
     private final Long          oorId;
+    private final Boolean       urgently;
 
     public EspeciallyDangerousOperations(EspeciallyDangerousOperations value) {
         this.id = value.id;
@@ -36,6 +37,7 @@ public class EspeciallyDangerousOperations implements Serializable {
         this.datecheck = value.datecheck;
         this.locationId = value.locationId;
         this.oorId = value.oorId;
+        this.urgently = value.urgently;
     }
 
     public EspeciallyDangerousOperations(
@@ -47,7 +49,8 @@ public class EspeciallyDangerousOperations implements Serializable {
         Long          chiefEngineer,
         LocalDateTime datecheck,
         Long          locationId,
-        Long          oorId
+        Long          oorId,
+        Boolean       urgently
     ) {
         this.id = id;
         this.name = name;
@@ -58,6 +61,7 @@ public class EspeciallyDangerousOperations implements Serializable {
         this.datecheck = datecheck;
         this.locationId = locationId;
         this.oorId = oorId;
+        this.urgently = urgently;
     }
 
     /**
@@ -123,6 +127,13 @@ public class EspeciallyDangerousOperations implements Serializable {
         return this.oorId;
     }
 
+    /**
+     * Getter for <code>especially_dangerous_operations.urgently</code>.
+     */
+    public Boolean getUrgently() {
+        return this.urgently;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -186,6 +197,12 @@ public class EspeciallyDangerousOperations implements Serializable {
         }
         else if (!oorId.equals(other.oorId))
             return false;
+        if (urgently == null) {
+            if (other.urgently != null)
+                return false;
+        }
+        else if (!urgently.equals(other.urgently))
+            return false;
         return true;
     }
 
@@ -202,6 +219,7 @@ public class EspeciallyDangerousOperations implements Serializable {
         result = prime * result + ((this.datecheck == null) ? 0 : this.datecheck.hashCode());
         result = prime * result + ((this.locationId == null) ? 0 : this.locationId.hashCode());
         result = prime * result + ((this.oorId == null) ? 0 : this.oorId.hashCode());
+        result = prime * result + ((this.urgently == null) ? 0 : this.urgently.hashCode());
         return result;
     }
 
@@ -218,6 +236,7 @@ public class EspeciallyDangerousOperations implements Serializable {
         sb.append(", ").append(datecheck);
         sb.append(", ").append(locationId);
         sb.append(", ").append(oorId);
+        sb.append(", ").append(urgently);
 
         sb.append(")");
         return sb.toString();

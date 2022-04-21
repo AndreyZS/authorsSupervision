@@ -6,13 +6,18 @@ package org.jooq.generated;
 
 import org.jooq.generated.tables.AccessRights;
 import org.jooq.generated.tables.AccessRightsUsers;
+import org.jooq.generated.tables.ArchitecturalSupervisionSchedule;
+import org.jooq.generated.tables.ArchitecturalSupervisionScheduleSignature;
 import org.jooq.generated.tables.Company;
+import org.jooq.generated.tables.CopyrightSupervisionReport;
+import org.jooq.generated.tables.CopyrightSupervisionReportSignature;
 import org.jooq.generated.tables.Division;
 import org.jooq.generated.tables.EspeciallyDangerousOperations;
 import org.jooq.generated.tables.FlywaySchemaHistory;
 import org.jooq.generated.tables.HistoryPassword;
 import org.jooq.generated.tables.ListEspeciallyDangerousWork;
 import org.jooq.generated.tables.Location;
+import org.jooq.generated.tables.Notes;
 import org.jooq.generated.tables.SignDanger;
 import org.jooq.generated.tables.UserSystem;
 import org.jooq.generated.tables.WorkPlan;
@@ -36,9 +41,29 @@ public class Tables {
     public static final AccessRightsUsers ACCESS_RIGHTS_USERS = AccessRightsUsers.ACCESS_RIGHTS_USERS;
 
     /**
+     * The table <code>architectural_supervision_schedule</code>.
+     */
+    public static final ArchitecturalSupervisionSchedule ARCHITECTURAL_SUPERVISION_SCHEDULE = ArchitecturalSupervisionSchedule.ARCHITECTURAL_SUPERVISION_SCHEDULE;
+
+    /**
+     * The table <code>architectural_supervision_schedule_signature</code>.
+     */
+    public static final ArchitecturalSupervisionScheduleSignature ARCHITECTURAL_SUPERVISION_SCHEDULE_SIGNATURE = ArchitecturalSupervisionScheduleSignature.ARCHITECTURAL_SUPERVISION_SCHEDULE_SIGNATURE;
+
+    /**
      * The table <code>company</code>.
      */
     public static final Company COMPANY = Company.COMPANY;
+
+    /**
+     * The table <code>copyright_supervision_report</code>.
+     */
+    public static final CopyrightSupervisionReport COPYRIGHT_SUPERVISION_REPORT = CopyrightSupervisionReport.COPYRIGHT_SUPERVISION_REPORT;
+
+    /**
+     * The table <code>copyright_supervision_report_signature</code>.
+     */
+    public static final CopyrightSupervisionReportSignature COPYRIGHT_SUPERVISION_REPORT_SIGNATURE = CopyrightSupervisionReportSignature.COPYRIGHT_SUPERVISION_REPORT_SIGNATURE;
 
     /**
      * The table <code>division</code>.
@@ -69,6 +94,11 @@ public class Tables {
      * The table <code>location</code>.
      */
     public static final Location LOCATION = Location.LOCATION;
+
+    /**
+     * The table <code>notes</code>.
+     */
+    public static final Notes NOTES = Notes.NOTES;
 
     /**
      * The table <code>sign_danger</code>.

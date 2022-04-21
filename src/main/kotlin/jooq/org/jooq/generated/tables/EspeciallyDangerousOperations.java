@@ -13,7 +13,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row9;
+import org.jooq.Row10;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -93,6 +93,11 @@ public class EspeciallyDangerousOperations extends TableImpl<EspeciallyDangerous
      */
     public final TableField<EspeciallyDangerousOperationsRecord, Long> OOR_ID = createField(DSL.name("oor_id"), SQLDataType.BIGINT.nullable(false).identity(true), this, "");
 
+    /**
+     * The column <code>especially_dangerous_operations.urgently</code>.
+     */
+    public final TableField<EspeciallyDangerousOperationsRecord, Boolean> URGENTLY = createField(DSL.name("urgently"), SQLDataType.BOOLEAN.defaultValue(DSL.field("false", SQLDataType.BOOLEAN)), this, "");
+
     private EspeciallyDangerousOperations(Name alias, Table<EspeciallyDangerousOperationsRecord> aliased) {
         this(alias, aliased, null);
     }
@@ -145,19 +150,19 @@ public class EspeciallyDangerousOperations extends TableImpl<EspeciallyDangerous
 
     @Override
     public List<ForeignKey<EspeciallyDangerousOperationsRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.ESPECIALLY_DANGEROUS_OPERATIONS__FK_EMPLOYEE_OOR, Keys.ESPECIALLY_DANGEROUS_OPERATIONS__FK_USER_SYSTEM_ENGINEER, Keys.ESPECIALLY_DANGEROUS_OPERATIONS__FK_LOCATION_OOO, Keys.ESPECIALLY_DANGEROUS_OPERATIONS__FK_OOR_OOO);
+        return Arrays.asList(Keys.ESPECIALLY_DANGEROUS_OPERATIONS__FK_EMPLOYEE_OOO, Keys.ESPECIALLY_DANGEROUS_OPERATIONS__FK_USER_SYSTEM_ENGINEER, Keys.ESPECIALLY_DANGEROUS_OPERATIONS__FK_LOCATION_OOO, Keys.ESPECIALLY_DANGEROUS_OPERATIONS__FK_OOR_OOO);
     }
 
-    private transient UserSystem _fkEmployeeOor;
+    private transient UserSystem _fkEmployeeOoo;
     private transient UserSystem _fkUserSystemEngineer;
     private transient Location _location;
     private transient ListEspeciallyDangerousWork _listEspeciallyDangerousWork;
 
-    public UserSystem fkEmployeeOor() {
-        if (_fkEmployeeOor == null)
-            _fkEmployeeOor = new UserSystem(this, Keys.ESPECIALLY_DANGEROUS_OPERATIONS__FK_EMPLOYEE_OOR);
+    public UserSystem fkEmployeeOoo() {
+        if (_fkEmployeeOoo == null)
+            _fkEmployeeOoo = new UserSystem(this, Keys.ESPECIALLY_DANGEROUS_OPERATIONS__FK_EMPLOYEE_OOO);
 
-        return _fkEmployeeOor;
+        return _fkEmployeeOoo;
     }
 
     public UserSystem fkUserSystemEngineer() {
@@ -208,11 +213,11 @@ public class EspeciallyDangerousOperations extends TableImpl<EspeciallyDangerous
     }
 
     // -------------------------------------------------------------------------
-    // Row9 type methods
+    // Row10 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row9<Long, String, LocalDateTime, LocalDateTime, Long, Long, LocalDateTime, Long, Long> fieldsRow() {
-        return (Row9) super.fieldsRow();
+    public Row10<Long, String, LocalDateTime, LocalDateTime, Long, Long, LocalDateTime, Long, Long, Boolean> fieldsRow() {
+        return (Row10) super.fieldsRow();
     }
 }

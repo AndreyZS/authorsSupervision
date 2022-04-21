@@ -180,4 +180,19 @@ public class EspeciallyDangerousOperationsDao extends DAOImpl<EspeciallyDangerou
     public List<org.jooq.generated.tables.pojos.EspeciallyDangerousOperations> fetchByOorId(Long... values) {
         return fetch(EspeciallyDangerousOperations.ESPECIALLY_DANGEROUS_OPERATIONS.OOR_ID, values);
     }
+
+    /**
+     * Fetch records that have <code>urgently BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<org.jooq.generated.tables.pojos.EspeciallyDangerousOperations> fetchRangeOfUrgently(Boolean lowerInclusive, Boolean upperInclusive) {
+        return fetchRange(EspeciallyDangerousOperations.ESPECIALLY_DANGEROUS_OPERATIONS.URGENTLY, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>urgently IN (values)</code>
+     */
+    public List<org.jooq.generated.tables.pojos.EspeciallyDangerousOperations> fetchByUrgently(Boolean... values) {
+        return fetch(EspeciallyDangerousOperations.ESPECIALLY_DANGEROUS_OPERATIONS.URGENTLY, values);
+    }
 }

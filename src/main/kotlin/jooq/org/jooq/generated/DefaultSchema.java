@@ -12,13 +12,18 @@ import org.jooq.Sequence;
 import org.jooq.Table;
 import org.jooq.generated.tables.AccessRights;
 import org.jooq.generated.tables.AccessRightsUsers;
+import org.jooq.generated.tables.ArchitecturalSupervisionSchedule;
+import org.jooq.generated.tables.ArchitecturalSupervisionScheduleSignature;
 import org.jooq.generated.tables.Company;
+import org.jooq.generated.tables.CopyrightSupervisionReport;
+import org.jooq.generated.tables.CopyrightSupervisionReportSignature;
 import org.jooq.generated.tables.Division;
 import org.jooq.generated.tables.EspeciallyDangerousOperations;
 import org.jooq.generated.tables.FlywaySchemaHistory;
 import org.jooq.generated.tables.HistoryPassword;
 import org.jooq.generated.tables.ListEspeciallyDangerousWork;
 import org.jooq.generated.tables.Location;
+import org.jooq.generated.tables.Notes;
 import org.jooq.generated.tables.SignDanger;
 import org.jooq.generated.tables.UserSystem;
 import org.jooq.generated.tables.WorkPlan;
@@ -50,9 +55,29 @@ public class DefaultSchema extends SchemaImpl {
     public final AccessRightsUsers ACCESS_RIGHTS_USERS = AccessRightsUsers.ACCESS_RIGHTS_USERS;
 
     /**
+     * The table <code>architectural_supervision_schedule</code>.
+     */
+    public final ArchitecturalSupervisionSchedule ARCHITECTURAL_SUPERVISION_SCHEDULE = ArchitecturalSupervisionSchedule.ARCHITECTURAL_SUPERVISION_SCHEDULE;
+
+    /**
+     * The table <code>architectural_supervision_schedule_signature</code>.
+     */
+    public final ArchitecturalSupervisionScheduleSignature ARCHITECTURAL_SUPERVISION_SCHEDULE_SIGNATURE = ArchitecturalSupervisionScheduleSignature.ARCHITECTURAL_SUPERVISION_SCHEDULE_SIGNATURE;
+
+    /**
      * The table <code>company</code>.
      */
     public final Company COMPANY = Company.COMPANY;
+
+    /**
+     * The table <code>copyright_supervision_report</code>.
+     */
+    public final CopyrightSupervisionReport COPYRIGHT_SUPERVISION_REPORT = CopyrightSupervisionReport.COPYRIGHT_SUPERVISION_REPORT;
+
+    /**
+     * The table <code>copyright_supervision_report_signature</code>.
+     */
+    public final CopyrightSupervisionReportSignature COPYRIGHT_SUPERVISION_REPORT_SIGNATURE = CopyrightSupervisionReportSignature.COPYRIGHT_SUPERVISION_REPORT_SIGNATURE;
 
     /**
      * The table <code>division</code>.
@@ -83,6 +108,11 @@ public class DefaultSchema extends SchemaImpl {
      * The table <code>location</code>.
      */
     public final Location LOCATION = Location.LOCATION;
+
+    /**
+     * The table <code>notes</code>.
+     */
+    public final Notes NOTES = Notes.NOTES;
 
     /**
      * The table <code>sign_danger</code>.
@@ -120,6 +150,9 @@ public class DefaultSchema extends SchemaImpl {
     @Override
     public final List<Sequence<?>> getSequences() {
         return Arrays.asList(
+            Sequences.ARCHITECTURAL_SUPERVISION_SCH_ARCHITECTURAL_SUPERVISION_SCH_SEQ,
+            Sequences.ARCHITECTURAL_SUPERVISION_SCH_ESPECIALLY_DANGEROUS_OPERATIO_SEQ,
+            Sequences.COPYRIGHT_SUPERVISION_REPORT__COPYRIGHT_SUPERVISION_REPORT__SEQ,
             Sequences.SEQUENCE_GENERATOR
         );
     }
@@ -129,13 +162,18 @@ public class DefaultSchema extends SchemaImpl {
         return Arrays.asList(
             AccessRights.ACCESS_RIGHTS,
             AccessRightsUsers.ACCESS_RIGHTS_USERS,
+            ArchitecturalSupervisionSchedule.ARCHITECTURAL_SUPERVISION_SCHEDULE,
+            ArchitecturalSupervisionScheduleSignature.ARCHITECTURAL_SUPERVISION_SCHEDULE_SIGNATURE,
             Company.COMPANY,
+            CopyrightSupervisionReport.COPYRIGHT_SUPERVISION_REPORT,
+            CopyrightSupervisionReportSignature.COPYRIGHT_SUPERVISION_REPORT_SIGNATURE,
             Division.DIVISION,
             EspeciallyDangerousOperations.ESPECIALLY_DANGEROUS_OPERATIONS,
             FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY,
             HistoryPassword.HISTORY_PASSWORD,
             ListEspeciallyDangerousWork.LIST_ESPECIALLY_DANGEROUS_WORK,
             Location.LOCATION,
+            Notes.NOTES,
             SignDanger.SIGN_DANGER,
             UserSystem.USER_SYSTEM,
             WorkPlan.WORK_PLAN,
