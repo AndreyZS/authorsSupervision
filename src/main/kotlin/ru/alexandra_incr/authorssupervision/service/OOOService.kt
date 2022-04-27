@@ -3,7 +3,6 @@ package ru.alexandra_incr.authorssupervision.service
 import org.jooq.DSLContext
 import org.jooq.Record
 import org.jooq.generated.tables.EspeciallyDangerousOperations.*
-import org.jooq.generated.tables.ListEspeciallyDangerousWork
 import org.springframework.stereotype.Service
 import ru.alexandra_incr.authorssupervision.controller.StatusCheck
 import ru.alexandra_incr.authorssupervision.dto.OOODto
@@ -29,7 +28,7 @@ class OOOService(
         init(OOODto,oorId,userSystemId,true)
     }
 
-    fun update(oooId:Long, status: StatusCheck, userSystemId: Long){
+    fun check(oooId:Long, status: StatusCheck, userSystemId: Long){
         dslContext.update(ESPECIALLY_DANGEROUS_OPERATIONS)
             .set(ESPECIALLY_DANGEROUS_OPERATIONS.CHIEF_ENGINEER,userSystemId)
             .set(ESPECIALLY_DANGEROUS_OPERATIONS.DATECHECK,status.date)

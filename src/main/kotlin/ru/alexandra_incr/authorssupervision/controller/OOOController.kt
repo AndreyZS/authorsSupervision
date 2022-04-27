@@ -42,6 +42,6 @@ class OOOController(
         tags = ["OOO"]
     )
     fun check(@RequestParam oooId:Long, @RequestBody statusCheck: StatusCheck){
-        oooService.update(oooId,statusCheck,securityUtils.getID()!!)
+        oooService.check(oooId,statusCheck,securityUtils.getID()!!)
     }
 }

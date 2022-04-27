@@ -6,6 +6,7 @@ package org.jooq.generated;
 
 import org.jooq.generated.tables.AccessRights;
 import org.jooq.generated.tables.AccessRightsUsers;
+import org.jooq.generated.tables.ArchitecturalSupervisionRegister;
 import org.jooq.generated.tables.ArchitecturalSupervisionSchedule;
 import org.jooq.generated.tables.ArchitecturalSupervisionScheduleSignature;
 import org.jooq.generated.tables.Company;
@@ -39,6 +40,11 @@ public class Tables {
      * The table <code>access_rights_users</code>.
      */
     public static final AccessRightsUsers ACCESS_RIGHTS_USERS = AccessRightsUsers.ACCESS_RIGHTS_USERS;
+
+    /**
+     * The table <code>architectural_supervision_register</code>.
+     */
+    public static final ArchitecturalSupervisionRegister ARCHITECTURAL_SUPERVISION_REGISTER = ArchitecturalSupervisionRegister.ARCHITECTURAL_SUPERVISION_REGISTER;
 
     /**
      * The table <code>architectural_supervision_schedule</code>.

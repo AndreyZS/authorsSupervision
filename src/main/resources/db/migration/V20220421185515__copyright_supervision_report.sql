@@ -1,6 +1,6 @@
 create table copyright_supervision_report
 (
-    id                 serial8 primary key,
+    id                 serial8 primary key constraint  fk_arc references architectural_supervision_schedule on UPDATE restrict on delete restrict,
     employee_id        serial8
         constraint fk_employee_copyright_supervision_report references user_system on UPDATE restrict on delete restrict,
     date_create        timestamp not null,

@@ -12,6 +12,7 @@ import org.jooq.Sequence;
 import org.jooq.Table;
 import org.jooq.generated.tables.AccessRights;
 import org.jooq.generated.tables.AccessRightsUsers;
+import org.jooq.generated.tables.ArchitecturalSupervisionRegister;
 import org.jooq.generated.tables.ArchitecturalSupervisionSchedule;
 import org.jooq.generated.tables.ArchitecturalSupervisionScheduleSignature;
 import org.jooq.generated.tables.Company;
@@ -53,6 +54,11 @@ public class DefaultSchema extends SchemaImpl {
      * The table <code>access_rights_users</code>.
      */
     public final AccessRightsUsers ACCESS_RIGHTS_USERS = AccessRightsUsers.ACCESS_RIGHTS_USERS;
+
+    /**
+     * The table <code>architectural_supervision_register</code>.
+     */
+    public final ArchitecturalSupervisionRegister ARCHITECTURAL_SUPERVISION_REGISTER = ArchitecturalSupervisionRegister.ARCHITECTURAL_SUPERVISION_REGISTER;
 
     /**
      * The table <code>architectural_supervision_schedule</code>.
@@ -162,6 +168,7 @@ public class DefaultSchema extends SchemaImpl {
         return Arrays.asList(
             AccessRights.ACCESS_RIGHTS,
             AccessRightsUsers.ACCESS_RIGHTS_USERS,
+            ArchitecturalSupervisionRegister.ARCHITECTURAL_SUPERVISION_REGISTER,
             ArchitecturalSupervisionSchedule.ARCHITECTURAL_SUPERVISION_SCHEDULE,
             ArchitecturalSupervisionScheduleSignature.ARCHITECTURAL_SUPERVISION_SCHEDULE_SIGNATURE,
             Company.COMPANY,

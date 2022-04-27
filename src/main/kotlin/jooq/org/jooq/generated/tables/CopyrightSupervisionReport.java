@@ -309,14 +309,22 @@ public class CopyrightSupervisionReport extends TableImpl<CopyrightSupervisionRe
 
     @Override
     public List<ForeignKey<CopyrightSupervisionReportRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.COPYRIGHT_SUPERVISION_REPORT__FK_EMPLOYEE_COPYRIGHT_SUPERVISION_REPORT, Keys.COPYRIGHT_SUPERVISION_REPORT__FK_PRESENCE_COPYRIGHT_SUPERVISION_REPORT, Keys.COPYRIGHT_SUPERVISION_REPORT__FK_LOCATION_COPYRIGHT_SUPERVISION_REPORT, Keys.COPYRIGHT_SUPERVISION_REPORT__FK_RESPONSIBLE_LEADER_COPYRIGHT_SUPERVISION_REPORT, Keys.COPYRIGHT_SUPERVISION_REPORT__FK_CHIEF_ENGINEER_COPYRIGHT_SUPERVISION_REPORT);
+        return Arrays.asList(Keys.COPYRIGHT_SUPERVISION_REPORT__FK_ARC, Keys.COPYRIGHT_SUPERVISION_REPORT__FK_EMPLOYEE_COPYRIGHT_SUPERVISION_REPORT, Keys.COPYRIGHT_SUPERVISION_REPORT__FK_PRESENCE_COPYRIGHT_SUPERVISION_REPORT, Keys.COPYRIGHT_SUPERVISION_REPORT__FK_LOCATION_COPYRIGHT_SUPERVISION_REPORT, Keys.COPYRIGHT_SUPERVISION_REPORT__FK_RESPONSIBLE_LEADER_COPYRIGHT_SUPERVISION_REPORT, Keys.COPYRIGHT_SUPERVISION_REPORT__FK_CHIEF_ENGINEER_COPYRIGHT_SUPERVISION_REPORT);
     }
 
+    private transient ArchitecturalSupervisionSchedule _architecturalSupervisionSchedule;
     private transient UserSystem _fkEmployeeCopyrightSupervisionReport;
     private transient UserSystem _fkPresenceCopyrightSupervisionReport;
     private transient Location _location;
     private transient UserSystem _fkResponsibleLeaderCopyrightSupervisionReport;
     private transient UserSystem _fkChiefEngineerCopyrightSupervisionReport;
+
+    public ArchitecturalSupervisionSchedule architecturalSupervisionSchedule() {
+        if (_architecturalSupervisionSchedule == null)
+            _architecturalSupervisionSchedule = new ArchitecturalSupervisionSchedule(this, Keys.COPYRIGHT_SUPERVISION_REPORT__FK_ARC);
+
+        return _architecturalSupervisionSchedule;
+    }
 
     public UserSystem fkEmployeeCopyrightSupervisionReport() {
         if (_fkEmployeeCopyrightSupervisionReport == null)

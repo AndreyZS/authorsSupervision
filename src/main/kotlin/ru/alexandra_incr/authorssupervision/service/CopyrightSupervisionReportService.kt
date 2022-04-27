@@ -1,13 +1,8 @@
 package ru.alexandra_incr.authorssupervision.service
 
 import org.jooq.DSLContext
-import org.jooq.generated.tables.ArchitecturalSupervisionSchedule
-import org.jooq.generated.tables.ArchitecturalSupervisionScheduleSignature
-import org.jooq.generated.tables.CopyrightSupervisionReport
-import org.jooq.generated.tables.CopyrightSupervisionReport.*
-import org.jooq.generated.tables.CopyrightSupervisionReportSignature
-import org.jooq.generated.tables.CopyrightSupervisionReportSignature.*
-import org.jooq.generated.tables.ListEspeciallyDangerousWork
+import org.jooq.generated.tables.CopyrightSupervisionReport.COPYRIGHT_SUPERVISION_REPORT
+import org.jooq.generated.tables.CopyrightSupervisionReportSignature.COPYRIGHT_SUPERVISION_REPORT_SIGNATURE
 import org.springframework.stereotype.Service
 import ru.alexandra_incr.authorssupervision.controller.StatusCheck
 import ru.alexandra_incr.authorssupervision.dto.CopyrightSupervisionReportDto
@@ -18,7 +13,7 @@ import ru.alexandra_incr.authorssupervision.service.crud.set
 class CopyrightSupervisionReportService(
     private val dslContext: DSLContext,
     private val addressService: AddressService,
-    private val architecturalSupervisionScheduleService: ArchitecturalSupervisionScheduleService
+    private val architecturalSupervisionScheduleService: ArchitecturalSupervisionScheduleService,
 ) {
 
     private val alg: (org.jooq.Record) -> (Long) = { res ->
@@ -30,10 +25,11 @@ class CopyrightSupervisionReportService(
         employeeId: Long,
         presenceId: Long?,
         leaderId: Long,
-        workPlan: Long,
+        architecturalSupervisionScheduleID: Long,
     ) {
         COPYRIGHT_SUPERVISION_REPORT.set(
             dslContext, alg,
+            Pair(COPYRIGHT_SUPERVISION_REPORT.ID, architecturalSupervisionScheduleID),
             Pair(COPYRIGHT_SUPERVISION_REPORT.EMPLOYEE_ID, employeeId),
             Pair(COPYRIGHT_SUPERVISION_REPORT.DATE_CREATE, dto.dateStart),
             Pair(COPYRIGHT_SUPERVISION_REPORT.PRESENCE, presenceId),
@@ -86,9 +82,12 @@ class CopyrightSupervisionReportService(
             .where(COPYRIGHT_SUPERVISION_REPORT.ID.eq(oorId))
             .execute()
     }
-    fun signatureEmployee(assId: Long, userSystemId: Long){
+
+    fun signatureEmployee(assId: Long, userSystemId: Long) {
         dslContext.update(COPYRIGHT_SUPERVISION_REPORT)
-            .set(COPYRIGHT_SUPERVISION_REPORT.SIGNATURE,true)
+            .set(COPYRIGHT_SUPERVISION_REPORT.SIGNATURE, true)
+            .where(COPYRIGHT_SUPERVISION_REPORT.EMPLOYEE_ID.eq(userSystemId)
+                .and(COPYRIGHT_SUPERVISION_REPORT.ID.eq(assId)))
             .execute()
     }
 
