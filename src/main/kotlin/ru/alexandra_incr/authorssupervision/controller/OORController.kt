@@ -1,6 +1,7 @@
 package ru.alexandra_incr.authorssupervision.controller
 
 import io.swagger.v3.oas.annotations.security.SecurityRequirement
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -33,5 +34,10 @@ class OORController(
     @PutMapping("engineer/check")
     fun check(@RequestParam oorID:Long,@RequestBody statusCheck: StatusCheck){
         oorService.checkEngineer(oorID,statusCheck,securityUtils.getID()!!)
+    }
+
+    @GetMapping("")
+    fun get(){
+        oorService.createExcel(LocalDateTime.now(),1)
     }
 }

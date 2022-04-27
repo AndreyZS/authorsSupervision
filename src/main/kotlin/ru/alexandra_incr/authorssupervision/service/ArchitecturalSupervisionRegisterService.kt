@@ -16,9 +16,9 @@ class ArchitecturalSupervisionRegisterService(
 
     override fun create(dto: ArchitecturalSupervisionRegisterDto, idPrevious: Long, userSystemId: Long) {
         val alg: (org.jooq.Record) -> (Long) = { res -> res.get(ARCHITECTURAL_SUPERVISION_REGISTER.ID) }
-        val t = COPYRIGHT_SUPERVISION_REPORT.findByOne(dslContext)(COPYRIGHT_SUPERVISION_REPORT.ID.eq(idPrevious)
+        val employeeWork = COPYRIGHT_SUPERVISION_REPORT.findByOne(dslContext)(COPYRIGHT_SUPERVISION_REPORT.ID.eq(idPrevious)
             .and(COPYRIGHT_SUPERVISION_REPORT.EMPLOYEE_ID.eq(userSystemId))).get(COPYRIGHT_SUPERVISION_REPORT.ID)
-        if (t != null) {
+        if (employeeWork != null) {
             ARCHITECTURAL_SUPERVISION_REGISTER.set(dslContext, alg,
                 Pair(ARCHITECTURAL_SUPERVISION_REGISTER.ID, idPrevious),
                 Pair(ARCHITECTURAL_SUPERVISION_REGISTER.EMPLOYEE_ID, userSystemId),
@@ -31,6 +31,15 @@ class ArchitecturalSupervisionRegisterService(
             )
         }
     }
+
+//    fun update(dto: ArchitecturalSupervisionRegisterDto, idPrevious: Long, userSystemId: Long) {
+//        val t = COPYRIGHT_SUPERVISION_REPORT.findByOne(dslContext)(COPYRIGHT_SUPERVISION_REPORT.ID.eq(idPrevious)
+//            .and(COPYRIGHT_SUPERVISION_REPORT.EMPLOYEE_ID.eq(userSystemId))).get(COPYRIGHT_SUPERVISION_REPORT.ID)
+//        if (t != null) {
+//            dslContext.update(COPYRIGHT_SUPERVISION_REPORT)
+//                .set()
+//        }
+//    }
 
     override fun checkEngineer(documentId: Long, status: StatusCheck, userSystemId: Long) {
         dslContext.update(ARCHITECTURAL_SUPERVISION_REGISTER)
